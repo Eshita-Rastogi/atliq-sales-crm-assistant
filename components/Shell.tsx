@@ -124,7 +124,7 @@ export function Shell({ children, radar, updates, refDate }: Props) {
             <NotificationBell items={radar} />
             <select
               value={owner}
-              onChange={(e) => setOwner(e.target.value)}
+              onChange={(e) => setOwner(e.target.value === "__switch" ? null : e.target.value)}
               className="rounded-md border border-slate-300 bg-white px-2 py-1.5 text-sm"
               aria-label="Switch person"
             >
@@ -133,6 +133,7 @@ export function Shell({ children, radar, updates, refDate }: Props) {
                   {p.id === "All" ? "Whole team" : p.id}
                 </option>
               ))}
+              <option value="__switch">↩ Switch user…</option>
             </select>
             <span className={`grid h-8 w-8 place-items-center rounded-full text-xs font-semibold text-white ${OWNER_COLOR[owner] || "bg-slate-800"}`}>
               {owner === "All" ? "👥" : owner.slice(0, 2).toUpperCase()}
