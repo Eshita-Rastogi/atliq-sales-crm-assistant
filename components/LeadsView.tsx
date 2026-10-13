@@ -78,7 +78,7 @@ export function LeadsView({ rows: baseRows }: { rows: LeadRow[] }) {
 
       {filter.key === "dupes" && (
         <div className="rounded-lg border border-orange-200 bg-orange-50 px-3 py-2 text-xs text-orange-800">
-          Duplicates are never merged automatically. <a href="/leads/merge" className="font-medium underline">Review &amp; merge pairs →</a>
+          Duplicates are never merged automatically. <Link href="/leads/merge" className="font-medium underline">Review &amp; merge pairs →</Link>
         </div>
       )}
       {view === "board" ? <PipelineBoard rows={shown} /> : <LeadTable rows={shown} />}
