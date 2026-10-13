@@ -52,8 +52,13 @@ export function FollowUpRow({ r, nextStep, showCompany = true }: { r: RadarItem;
       {open && (
         <div className="space-y-2 border-t border-slate-100 bg-slate-50/60 px-4 py-3 pl-12">
           <blockquote className="quote">
-            “{r.quote}” —{" "}
-            <Link className="not-italic text-indigo-600 hover:underline" href={`/docs/${encodeURIComponent(r.doc_id)}`}>source</Link>
+            “{r.quote}”
+            {r.doc_id && (
+              <>
+                {" "}—{" "}
+                <Link className="not-italic text-indigo-600 hover:underline" href={`/docs/${encodeURIComponent(r.doc_id)}`}>source</Link>
+              </>
+            )}
           </blockquote>
           {nextStep && (
             <div className="text-xs text-slate-700">
@@ -65,11 +70,11 @@ export function FollowUpRow({ r, nextStep, showCompany = true }: { r: RadarItem;
             {r.needs_review && <span className="ml-2 rounded bg-slate-200 px-1 text-slate-700">date unclear — please check</span>}
           </div>
           <div className="flex flex-wrap gap-1.5 pt-1">
-            <DraftButton signalId={r.signal_id} />
+            {r.doc_id && <DraftButton signalId={r.signal_id} />}
             {!closed && <button className="btn" onClick={() => snooze(r.signal_id)}>Snooze</button>}
             {!closed && <button className="btn-primary" onClick={() => markDone(r.signal_id)}>Mark done ✓</button>}
             {showCompany && (
-              <Link href={`/leads/${encodeURIComponent(r.account_id)}`} className="btn">Open lead →</Link>
+              <Link href={r.account_id.startsWith("added-") ? `/leads/added?id=${r.account_id}` : `/leads/${encodeURIComponent(r.account_id)}`} className="btn">Open lead →</Link>
             )}
           </div>
         </div>

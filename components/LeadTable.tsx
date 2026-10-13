@@ -22,6 +22,8 @@ export interface LeadRow {
   next_due: string | null;
   next_title: string;
   duplicate: boolean;
+  href?: string; // leads added in the app open a local page
+  added?: boolean;
 }
 
 export function LeadTable({ rows }: { rows: LeadRow[] }) {
@@ -56,9 +58,10 @@ export function LeadTable({ rows }: { rows: LeadRow[] }) {
           {[...rows].sort(by).map((r) => (
             <tr key={r.id} className="hover:bg-slate-50">
               <td className="px-3 py-2.5">
-                <Link href={`/leads/${encodeURIComponent(r.id)}`} className="font-medium text-slate-900 hover:text-indigo-700">{r.company}</Link>
+                <Link href={r.href || `/leads/${encodeURIComponent(r.id)}`} className="font-medium text-slate-900 hover:text-indigo-700">{r.company}</Link>
                 <div className="text-xs text-slate-500">
                   {r.service || "Service not recorded"}
+                  {r.added && <span className="ml-1 font-medium text-emerald-700">· Added in app</span>}
                   {!r.in_crm && <span className="ml-1 font-medium text-amber-700">· Not in CRM</span>}
                   {r.duplicate && <span className="ml-1 font-medium text-orange-700">· Possible duplicate</span>}
                 </div>

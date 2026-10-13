@@ -93,6 +93,10 @@ export function Shell({ children, radar, updates, refDate }: Props) {
             );
           })}
         </nav>
+        <div className="border-t border-slate-800 px-5 py-3 text-xs">
+          <Link href="/sources" className={`block py-1 ${path.startsWith("/sources") ? "text-white" : "text-slate-400 hover:text-slate-200"}`}>ⓘ Data sources</Link>
+          <Link href="/updates" className={`block py-1 ${path.startsWith("/updates") ? "text-white" : "text-slate-400 hover:text-slate-200"}`}>✓ CRM review &amp; audit log</Link>
+        </div>
         <div className="border-t border-slate-800 px-5 py-4 text-[11px] leading-relaxed text-slate-500">
           Data snapshot: <span className="text-slate-300">{refDate}</span>
           <br />

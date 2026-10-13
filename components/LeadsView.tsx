@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { inView, useAppState } from "./AppState";
 import { LeadTable, type LeadRow } from "./LeadTable";
@@ -10,16 +11,28 @@ const FILTERS = [
   { key: "all", label: "All", test: () => true },
   { key: "active", label: "Active deals", test: (r: LeadRow) => !["Won", "Lost"].includes(r.ai_stage) },
   { key: "overdue", label: "Has overdue follow-ups", test: (r: LeadRow) => r.overdue > 0 },
-  { key: "untracked", label: "New / untracked", test: (r: LeadRow) => !r.in_crm || r.ai_stage === "New" },
+  { key: "untracked", label: "New / untracked", test: (r: LeadRow) => !r.in_crm || r.ai_stage === "New" || !!r.added },
   { key: "unassigned", label: "No owner", test: (r: LeadRow) => !r.owner },
   { key: "stale", label: "No contact in 14+ days", test: (r: LeadRow) => !["Won", "Lost"].includes(r.ai_stage) && (r.days == null || r.days >= 14) },
   { key: "dupes", label: "Possible duplicates", test: (r: LeadRow) => r.duplicate },
 ];
 
-export function LeadsView({ rows }: { rows: LeadRow[] }) {
+export function LeadsView({ rows: baseRows }: { rows: LeadRow[] }) {
+  let rows = baseRows;
   const params = useSearchParams();
   const router = useRouter();
-  const { owner } = useAppState();
+  const { owner, customLeads, customItems, merges } = useAppState();
+  const dropped = new Set(merges.map((m) => m.drop));
+  const added: LeadRow[] = customLeads.map((c) => {
+    const items = customItems.filter((i) => i.account_id === c.id && i.due_date).sort((a, b) => a.due_date!.localeCompare(b.due_date!));
+    return {
+      id: c.id, company: c.company, in_crm: true, source: c.source || "—", owner: c.owner, service: c.service,
+      crm_stage: "New", ai_stage: "New", value: c.value, last_touch: c.created_at.slice(0, 10), days: 0,
+      open: items.length, overdue: 0, next_due: items[0]?.due_date ?? null, next_title: items[0]?.title ?? "",
+      duplicate: false, href: `/leads/added?id=${c.id}`, added: true,
+    };
+  });
+  rows = [...added, ...rows.filter((r) => !dropped.has(r.id))];
   const view = params.get("view") === "list" ? "list" : "board";
   const filter = FILTERS.find((f) => f.key === params.get("filter")) || FILTERS[0];
   // Untracked and unassigned leads have no owner yet — always show them so someone picks them up.
@@ -42,9 +55,12 @@ export function LeadsView({ rows }: { rows: LeadRow[] }) {
             Stages are the real stage from emails and meetings — click any lead for the full story.
           </p>
         </div>
+        <div className="flex items-center gap-2">
+        <Link href="/leads/new" className="btn-primary px-3 py-1.5 text-sm">+ New lead</Link>
         <div className="flex rounded-lg border border-slate-300 bg-white p-0.5 text-xs">
           <button className={seg(view === "board")} onClick={() => set("view", "board")}>▦ Stage board</button>
           <button className={seg(view === "list")} onClick={() => set("view", "list")}>☰ List</button>
+        </div>
         </div>
       </div>
 
@@ -60,6 +76,11 @@ export function LeadsView({ rows }: { rows: LeadRow[] }) {
         ))}
       </div>
 
+      {filter.key === "dupes" && (
+        <div className="rounded-lg border border-orange-200 bg-orange-50 px-3 py-2 text-xs text-orange-800">
+          Duplicates are never merged automatically. <a href="/leads/merge" className="font-medium underline">Review &amp; merge pairs →</a>
+        </div>
+      )}
       {view === "board" ? <PipelineBoard rows={shown} /> : <LeadTable rows={shown} />}
     </div>
   );

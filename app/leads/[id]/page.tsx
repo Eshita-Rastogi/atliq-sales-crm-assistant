@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { DocCard } from "@/components/DocCard";
 import { FollowUpRow } from "@/components/FollowUpRow";
 import { LeadTabs } from "@/components/LeadTabs";
+import { MergeBanner } from "@/components/MergeBanner";
 import { SuggestionRow } from "@/components/SuggestionRow";
 import { accountById, model } from "@/lib/model";
 import { OWNER_COLOR, STAGE_STYLE, TYPE_LABEL, TYPE_STYLE, initials, money } from "@/lib/format";
@@ -87,12 +88,7 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
             <span className="font-semibold">Next step: </span>{a.next_best_action}
           </div>
         )}
-        {a.duplicate_of.length > 0 && (
-          <div className="mt-3 rounded-lg border border-orange-200 bg-orange-50 px-3 py-2 text-xs text-orange-800">
-            Possible duplicate of{" "}
-            {a.duplicate_of.map((d) => <Link key={d} href={`/leads/${encodeURIComponent(d)}`} className="font-medium underline">{d}</Link>)}. {a.duplicate_note}
-          </div>
-        )}
+        {a.duplicate_of.length > 0 && <MergeBanner id={a.id} others={a.duplicate_of} note={a.duplicate_note} />}
         <h3 className="mb-1 mt-5 text-sm font-semibold text-slate-700">Open follow-ups ({followUps.length})</h3>
         <div className="divide-y divide-slate-100 rounded-lg border border-slate-200">
           {followUps.map((r) => <FollowUpRow key={r.signal_id} r={r} showCompany={false} />)}

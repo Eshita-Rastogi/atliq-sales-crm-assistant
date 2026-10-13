@@ -26,10 +26,12 @@ const BUCKETS = [
   { key: "later", label: "Later", tone: "text-slate-600", test: (r: RadarItem) => r.days_overdue === 0 && (!r.due_date || r.due_date > WEEK_END) },
 ];
 
-export function FollowUps({ items, nextSteps, values }: { items: RadarItem[]; nextSteps: Record<string, string>; values: Record<string, number | null> }) {
+export function FollowUps({ items: baseItems, nextSteps, values }: { items: RadarItem[]; nextSteps: Record<string, string>; values: Record<string, number | null> }) {
+  let items = baseItems;
   const params = useSearchParams();
   const when = params.get("when");
-  const { owner, done, snoozed } = useAppState();
+  const { owner, done, snoozed, customItems } = useAppState();
+  items = [...customItems, ...items];
   const [group, setGroup] = useState<"time" | "lead">("time");
   const [sort, setSort] = useState<"priority" | "due">("priority");
   const [type, setType] = useState("all");

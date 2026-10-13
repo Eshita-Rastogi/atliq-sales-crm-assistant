@@ -17,7 +17,7 @@ export interface HomeAccount {
 const WEEK_END = "2026-07-17";
 
 export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem[]; accounts: HomeAccount[]; refDate: string; nextSteps: Record<string, string> }) {
-  const { owner, done, snoozed } = useAppState();
+  const { owner, done, snoozed, customLeads } = useAppState();
   const who = owner === "All" ? "team" : owner;
   const open = radar.filter((r) => !done[r.signal_id] && !snoozed[r.signal_id] && inView(owner, r.owner));
   const mine = accounts.filter((a) => inView(owner, a.owner));
@@ -25,7 +25,7 @@ export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem
   const overdue = open.filter((r) => r.days_overdue > 0);
   const week = open.filter((r) => r.days_overdue === 0 && r.due_date && r.due_date <= WEEK_END);
   const untracked = accounts.filter((a) => !a.in_crm);
-  const fresh = mine.filter((a) => a.in_crm && a.stage === "New");
+  const fresh = [...mine.filter((a) => a.in_crm && a.stage === "New"), ...customLeads.filter((c) => inView(owner, c.owner))];
 
   const seen = new Set<string>();
   const top = open
@@ -41,11 +41,14 @@ export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem
 
   return (
     <div className="mx-auto max-w-5xl space-y-8">
+      <div className="flex flex-wrap items-start justify-between gap-3">
       <div>
         <h1 className="text-2xl font-semibold text-slate-900">{owner === "All" ? "Hi team" : `Hi ${owner}`} — here&apos;s your day</h1>
         <p className="mt-1 text-sm text-slate-500">
           {refDate} · {overdue.length > 0 ? `${overdue.length} follow-ups are overdue — start with the list below.` : "You're on top of your follow-ups."}
         </p>
+      </div>
+      <Link href="/leads/new" className="btn-primary px-3 py-1.5 text-sm">+ New lead</Link>
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">

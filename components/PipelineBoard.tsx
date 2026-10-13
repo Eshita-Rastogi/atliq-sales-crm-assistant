@@ -23,7 +23,7 @@ export function PipelineBoard({ rows }: { rows: LeadRow[] }) {
             </div>
             <div className="space-y-2">
               {col.map((c) => (
-                <Link key={c.id} href={`/leads/${encodeURIComponent(c.id)}`} className="card block p-3 transition hover:border-indigo-300 hover:shadow-sm">
+                <Link key={c.id} href={c.href || `/leads/${encodeURIComponent(c.id)}`} className="card block p-3 transition hover:border-indigo-300 hover:shadow-sm">
                   <div className="flex items-start justify-between gap-2">
                     <div className="text-sm font-medium leading-snug text-slate-900">{c.company}</div>
                     <span
@@ -43,6 +43,7 @@ export function PipelineBoard({ rows }: { rows: LeadRow[] }) {
                       <span className="text-slate-400">No open follow-ups</span>
                     )}
                   </div>
+                  {c.added && <div className="mt-1.5 text-[11px] font-medium text-emerald-700">Added in app</div>}
                   {!c.in_crm && <div className="mt-1.5 text-[11px] font-medium text-amber-700">Not in CRM yet</div>}
                 </Link>
               ))}
