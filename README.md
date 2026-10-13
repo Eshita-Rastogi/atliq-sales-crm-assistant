@@ -21,6 +21,7 @@ Start by picking who you are (Bhavin, Dhaval, Karandeep, Jay or *Whole team*); e
 | Review CRM updates | Top-bar badge: all AI-suggested CRM changes for your leads, with an audit log. |
 | **+ New lead** | Add a lead by hand or **paste an email / note / business-card text** — the AI fills the form and finds follow-ups (verbatim quotes, dates in code). A **duplicate check** (contact email, email domain, company name) runs before saving. |
 | **Merge duplicates** | Side-by-side review of possible duplicates (e.g. Meridian L-1003 / L-1027): choose the value per field, then **Merge** or **Keep both** (e.g. GlobalMart's two service lines). Never automatic; logged. |
+| **Connect sources** | Per person: how to link Gmail / Outlook, calendar, meeting notes & transcripts, WhatsApp (Business API or forwarding), LinkedIn, a personal forward-to address and paste capture — what each reads / never touches, step-by-step setup and the permission screen. Connect is a clearly labelled simulation in the prototype. |
 | **Data sources** | What the assistant reads today (dataset snapshot), how a document becomes a follow-up, and the integration roadmap (Gmail/Outlook, calendar, forward-to address, WhatsApp Business, CRM write-back). |
 
 ## How it works

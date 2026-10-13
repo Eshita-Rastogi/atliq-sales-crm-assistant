@@ -21,6 +21,7 @@ const NAV = [
 ];
 
 const MORE = [
+  { href: "/settings/connections", label: "Connect sources", icon: "🔗" },
   { href: "/sources", label: "Data sources", icon: "ⓘ" },
   { href: "/settings/reminders", label: "Reminder settings", icon: "⏰" },
   { href: "/updates", label: "CRM review & log", icon: "✓" },

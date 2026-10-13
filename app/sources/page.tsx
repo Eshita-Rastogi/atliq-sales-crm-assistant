@@ -72,7 +72,10 @@ export default function SourcesPage() {
       </section>
 
       <section>
-        <h2 className="mb-2 font-semibold text-slate-900">Connecting everyone&apos;s channels — roadmap</h2>
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="font-semibold text-slate-900">Connecting everyone&apos;s channels — roadmap</h2>
+          <Link href="/settings/connections" className="btn-primary px-3 py-1.5 text-sm">🔗 How to connect your email &amp; messages →</Link>
+        </div>
         <div className="card overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="border-b bg-slate-50 text-xs text-slate-500">
