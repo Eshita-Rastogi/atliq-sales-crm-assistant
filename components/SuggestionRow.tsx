@@ -29,7 +29,7 @@ export function SuggestionRow({ s, company }: { s: CrmSuggestion; company?: stri
   return (
     <div className={`rounded-lg border p-3 ${d ? (d.decision === "approved" ? "border-emerald-200 bg-emerald-50/50" : "border-slate-200 bg-slate-50 opacity-70") : "border-slate-200 bg-white"}`}>
       <div className="flex flex-wrap items-start gap-3">
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 basis-64">
           <div className="flex flex-wrap items-center gap-2 text-sm">
             {company && (
               <Link href={`/accounts/${encodeURIComponent(s.account_id)}`} className="font-semibold text-slate-900 hover:text-indigo-700">
@@ -60,7 +60,7 @@ export function SuggestionRow({ s, company }: { s: CrmSuggestion; company?: stri
             </blockquote>
           )}
         </div>
-        <div className="flex items-center gap-1">
+        <div className="ml-auto flex items-center gap-1">
           {d ? (
             <span className={`text-xs font-medium ${d.decision === "approved" ? "text-emerald-700" : "text-slate-500"}`}>
               {d.decision === "approved" ? (isFlag ? "Reviewed ✓" : "Approved ✓") : "Rejected"} · {d.by}
