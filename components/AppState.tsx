@@ -67,8 +67,9 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
         markDone: (id) => setDone((d) => ({ ...d, [id]: now() })),
         snooze: (id) => setSnoozed((d) => ({ ...d, [id]: now() })),
         undo: (id) => {
-          setDone(({ [id]: _a, ...rest }) => rest);
-          setSnoozed(({ [id]: _b, ...rest }) => rest);
+          const drop = (m: Record<string, string>) => Object.fromEntries(Object.entries(m).filter(([k]) => k !== id));
+          setDone(drop);
+          setSnoozed(drop);
         },
         decisions,
         decide: (id, decision, value) =>
