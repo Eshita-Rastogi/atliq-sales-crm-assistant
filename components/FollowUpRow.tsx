@@ -102,7 +102,7 @@ export function FollowUpRow({ r, nextStep, showCompany = true, stage = "Contacte
             )}
             {closed && <button className="btn" onClick={() => undo(r.signal_id)}>Reopen</button>}
             {showCompany && (
-              <Link href={r.account_id.startsWith("added-") ? `/leads/added?id=${r.account_id}` : `/leads/${encodeURIComponent(r.account_id)}`} className="btn">Open lead →</Link>
+              <Link href={r.account_id.startsWith("added-") ? `/leads/added?id=${r.account_id}` : `/leads/${encodeURIComponent(r.account_id)}`} className="btn">Show lead details →</Link>
             )}
           </div>
           <p className="text-[10px] text-slate-400">Snooze hides it until the date · Remind me keeps it on your list and pings you on the date.</p>
