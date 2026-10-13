@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { inView, useAppState } from "./AppState";
 import { FollowUpRow } from "./FollowUpRow";
-import type { RadarItem, SignalType } from "@/lib/types";
+import type { RadarItem, SignalType, Stage } from "@/lib/types";
 import { money } from "@/lib/format";
 
 const TODAY = "2026-07-10";
@@ -26,7 +26,7 @@ const BUCKETS = [
   { key: "later", label: "Later", tone: "text-slate-600", test: (r: RadarItem) => r.days_overdue === 0 && (!r.due_date || r.due_date > WEEK_END) },
 ];
 
-export function FollowUps({ items: baseItems, nextSteps, values }: { items: RadarItem[]; nextSteps: Record<string, string>; values: Record<string, number | null> }) {
+export function FollowUps({ items: baseItems, nextSteps, values, stages }: { items: RadarItem[]; nextSteps: Record<string, string>; values: Record<string, number | null>; stages: Record<string, Stage> }) {
   let items = baseItems;
   const params = useSearchParams();
   const when = params.get("when");
@@ -92,7 +92,7 @@ export function FollowUps({ items: baseItems, nextSteps, values }: { items: Rada
             <section key={b.key}>
               <h2 className={`mb-2 text-sm font-semibold ${b.tone}`}>{b.label} <span className="font-normal text-slate-400">({rows.length})</span></h2>
               <div className="card divide-y divide-slate-100">
-                {rows.map((r) => <FollowUpRow key={r.signal_id} r={r} nextStep={nextSteps[r.account_id]} />)}
+                {rows.map((r) => <FollowUpRow key={r.signal_id} r={r} nextStep={nextSteps[r.account_id]} stage={stages[r.account_id]} />)}
               </div>
             </section>
           );
@@ -111,7 +111,7 @@ export function FollowUps({ items: baseItems, nextSteps, values }: { items: Rada
                   <span className="ml-auto text-xs text-slate-400">{rows.length} item{rows.length > 1 ? "s" : ""}</span>
                 </div>
                 <div className="divide-y divide-slate-100">
-                  {[...rows].sort(sorter).map((r) => <FollowUpRow key={r.signal_id} r={r} nextStep={nextSteps[r.account_id]} showCompany={false} />)}
+                  {[...rows].sort(sorter).map((r) => <FollowUpRow key={r.signal_id} r={r} nextStep={nextSteps[r.account_id]} showCompany={false} stage={stages[r.account_id]} />)}
                 </div>
               </section>
             );

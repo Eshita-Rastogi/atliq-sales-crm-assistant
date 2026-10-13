@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import type { RadarItem } from "@/lib/types";
+import type { RadarItem, Stage } from "@/lib/types";
 
 // Prototype state lives in the browser (localStorage): who is using the app, done/snoozed
 // reminders, approve/reject decisions (audit log), leads added by hand and merges.
@@ -50,8 +50,36 @@ export const DEFAULT_REMINDERS: ReminderSettings = {
   channels: { inapp: true, email: false, whatsapp: false },
 };
 
+export interface Outcome {
+  action: string;
+  date: string; // ISO date the action was taken
+  note: string;
+  stage?: Stage; // stage the lead moved to, if any
+}
+
+export interface Activity {
+  at: string; // ISO timestamp logged
+  date: string; // business date of the action
+  by: string;
+  text: string;
+}
+
+export interface LeadEdit {
+  fields: Record<string, string>; // edited CRM fields
+  stage?: Stage;
+  last_contact?: string;
+}
+
 interface State {
   ready: boolean;
+  outcomes: Record<string, Outcome>;
+  completeFollowUp: (item: { signal_id: string; account_id: string; title: string }, o: Outcome) => void;
+  remindAt: Record<string, string>;
+  setRemind: (id: string, date: string) => void;
+  leadEdits: Record<string, LeadEdit>;
+  activity: Record<string, Activity[]>;
+  setStage: (accountId: string, stage: Stage, note?: string) => void;
+  editLead: (accountId: string, fields: Record<string, string>) => void;
   reminders: ReminderSettings;
   setReminders: (r: ReminderSettings) => void;
   owner: string | null; // null = not chosen yet; "All" = whole team
@@ -85,6 +113,10 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   const [customItems, setCustomItems] = useState<RadarItem[]>([]);
   const [merges, setMerges] = useState<Merge[]>([]);
   const [reminders, setReminders] = useState<ReminderSettings>(DEFAULT_REMINDERS);
+  const [outcomes, setOutcomes] = useState<Record<string, Outcome>>({});
+  const [remindAt, setRemindAt] = useState<Record<string, string>>({});
+  const [leadEdits, setLeadEdits] = useState<Record<string, LeadEdit>>({});
+  const [activity, setActivity] = useState<Record<string, Activity[]>>({});
 
   useEffect(() => {
     try {
@@ -97,6 +129,10 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
       setCustomItems(s.customItems || []);
       setMerges(s.merges || []);
       if (s.reminders) setReminders({ ...DEFAULT_REMINDERS, ...s.reminders });
+      setOutcomes(s.outcomes || {});
+      setRemindAt(s.remindAt || {});
+      setLeadEdits(s.leadEdits || {});
+      setActivity(s.activity || {});
     } catch {}
     setReady(true);
   }, []);
@@ -104,20 +140,47 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!ready) return;
     try {
-      localStorage.setItem(KEY, JSON.stringify({ owner, done, snoozed, decisions, customLeads, customItems, merges, reminders }));
+      localStorage.setItem(KEY, JSON.stringify({ owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, outcomes, remindAt, leadEdits, activity }));
     } catch {}
-  }, [owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, ready]);
+  }, [owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, outcomes, remindAt, leadEdits, activity, ready]);
 
   const now = () => new Date().toISOString();
   const by = !owner || owner === "All" ? "Founder" : owner;
   const drop = (id: string) => (m: Record<string, string>) => Object.fromEntries(Object.entries(m).filter(([k]) => k !== id));
   const log = (id: string, decision: "approved" | "rejected", value: string) =>
     setDecisions((d) => ({ ...d, [id]: { id, decision, value, at: now(), by } }));
+  const addActivity = (accountId: string, date: string, text: string) =>
+    setActivity((a) => ({ ...a, [accountId]: [{ at: now(), date, by, text }, ...(a[accountId] || [])] }));
+  const patchLead = (accountId: string, p: Partial<LeadEdit>) =>
+    setLeadEdits((e) => {
+      const cur = e[accountId] || { fields: {} };
+      return { ...e, [accountId]: { ...cur, ...p, fields: { ...cur.fields, ...(p.fields || {}) } } };
+    });
 
   return (
     <Ctx.Provider
       value={{
         ready,
+        outcomes,
+        completeFollowUp: (item, o) => {
+          setDone((d) => ({ ...d, [item.signal_id]: now() }));
+          setOutcomes((x) => ({ ...x, [item.signal_id]: o }));
+          setSnoozed(drop(item.signal_id));
+          patchLead(item.account_id, { last_contact: o.date, ...(o.stage ? { stage: o.stage } : {}) });
+          addActivity(item.account_id, o.date, `✓ ${item.title} — ${o.action}${o.note ? `: ${o.note}` : ""}${o.stage ? ` · stage → ${o.stage}` : ""}`);
+        },
+        remindAt,
+        setRemind: (id, date) => setRemindAt((r) => ({ ...r, [id]: date })),
+        leadEdits,
+        activity,
+        setStage: (accountId, stage, note) => {
+          patchLead(accountId, { stage });
+          addActivity(accountId, now().slice(0, 10), `Stage → ${stage}${note ? `: ${note}` : ""}`);
+        },
+        editLead: (accountId, fields) => {
+          patchLead(accountId, { fields });
+          addActivity(accountId, now().slice(0, 10), `Updated ${Object.keys(fields).join(", ")}`);
+        },
         reminders,
         setReminders,
         owner,
@@ -129,6 +192,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
         undo: (id) => {
           setDone(drop(id));
           setSnoozed(drop(id));
+          setOutcomes((x) => Object.fromEntries(Object.entries(x).filter(([k]) => k !== id)));
         },
         decisions,
         decide: log,
@@ -159,6 +223,10 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
           setCustomLeads([]);
           setCustomItems([]);
           setMerges([]);
+          setOutcomes({});
+          setRemindAt({});
+          setLeadEdits({});
+          setActivity({});
         },
       }}
     >

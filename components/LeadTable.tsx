@@ -22,6 +22,8 @@ export interface LeadRow {
   next_due: string | null;
   next_title: string;
   duplicate: boolean;
+  fields?: Record<string, string>; // profile fields for completeness
+  profile?: number; // % complete
   href?: string; // leads added in the app open a local page
   added?: boolean;
 }
@@ -51,6 +53,7 @@ export function LeadTable({ rows }: { rows: LeadRow[] }) {
             <th className="px-3 py-2 text-left font-medium">Owner</th>
             {th("next", "Next follow-up")}
             {th("days", "Last contact")}
+            <th className="px-3 py-2 text-left font-medium">Profile</th>
             <th className="px-3 py-2 text-left font-medium">Source</th>
           </tr>
         </thead>
@@ -89,10 +92,15 @@ export function LeadTable({ rows }: { rows: LeadRow[] }) {
                 )}
               </td>
               <td className="px-3 py-2.5 text-xs text-slate-600">{r.days == null ? "never" : `${r.days}d ago`}</td>
+              <td className="px-3 py-2.5 text-xs">
+                {r.profile != null && (
+                  <span className={`font-medium ${r.profile >= 80 ? "text-emerald-600" : r.profile >= 50 ? "text-amber-600" : "text-rose-600"}`}>{r.profile}%</span>
+                )}
+              </td>
               <td className="px-3 py-2.5 text-xs text-slate-500">{r.source}</td>
             </tr>
           ))}
-          {rows.length === 0 && <tr><td colSpan={7} className="px-3 py-6 text-center text-sm text-slate-500">No leads in this view.</td></tr>}
+          {rows.length === 0 && <tr><td colSpan={8} className="px-3 py-6 text-center text-sm text-slate-500">No leads in this view.</td></tr>}
         </tbody>
       </table>
     </div>

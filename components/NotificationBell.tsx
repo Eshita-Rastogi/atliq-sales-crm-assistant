@@ -22,7 +22,7 @@ const leadHref = (id: string) => (id.startsWith("added-") ? `/leads/added?id=${i
 
 /** Build the notification groups from open items and the person's reminder settings. */
 export function useNotifications(items: Notice[]) {
-  const { owner, done, snoozed, reminders, customItems } = useAppState();
+  const { owner, done, snoozed, reminders, customItems, remindAt } = useAppState();
   const all: Notice[] = [
     ...customItems.map((c) => ({ id: c.signal_id, account_id: c.account_id, company: c.company, title: c.title, owner: c.owner, due_date: c.due_date, overdue: 0 })),
     ...items,
@@ -38,17 +38,18 @@ export function useNotifications(items: Notice[]) {
       key: "reminders",
       label: "Your reminders",
       tone: "text-indigo-600",
-      rows: all.filter((r) => snoozed[r.id] && !done[r.id] && inView(owner, r.owner)),
+      rows: all.filter((r) => (snoozed[r.id] || remindAt[r.id]) && !done[r.id] && inView(owner, r.owner)),
     },
   ];
   const count = groups.slice(0, 4).reduce((t, g) => t + g.rows.length, 0);
-  return { groups, count, snoozed };
+  const when = (id: string) => remindAt[id] || snoozed[id] || "";
+  return { groups, count, snoozed, when };
 }
 
 export function NotificationBell({ items }: { items: Notice[] }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const { groups, count, snoozed } = useNotifications(items);
+  const { groups, count, when } = useNotifications(items);
 
   useEffect(() => {
     const close = (e: MouseEvent) => ref.current && !ref.current.contains(e.target as Node) && setOpen(false);
@@ -78,7 +79,7 @@ export function NotificationBell({ items }: { items: Notice[] }) {
                       <div className="truncate text-sm text-slate-800">{r.title}</div>
                       <div className="text-xs text-slate-500">
                         {r.company} ·{" "}
-                        {g.key === "reminders" ? `reminder ${fmtDate(snoozed[r.id].slice(0, 10))}` : r.overdue > 0 ? `overdue ${r.overdue}d` : r.due_date ? `due ${fmtDate(r.due_date)}` : ""}
+                        {g.key === "reminders" ? `reminder ${fmtDate(when(r.id).slice(0, 10))}` : r.overdue > 0 ? `overdue ${r.overdue}d` : r.due_date ? `due ${fmtDate(r.due_date)}` : ""}
                       </div>
                     </Link>
                   ))}

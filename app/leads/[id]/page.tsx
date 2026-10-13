@@ -3,11 +3,12 @@ import { notFound } from "next/navigation";
 import { BackButton } from "@/components/BackButton";
 import { DocCard } from "@/components/DocCard";
 import { FollowUpRow } from "@/components/FollowUpRow";
+import { LeadStatusPanel } from "@/components/LeadStatusPanel";
 import { LeadTabs } from "@/components/LeadTabs";
 import { MergeBanner } from "@/components/MergeBanner";
 import { SuggestionRow } from "@/components/SuggestionRow";
 import { accountById, model } from "@/lib/model";
-import { OWNER_COLOR, STAGE_STYLE, TYPE_LABEL, TYPE_STYLE, initials, money } from "@/lib/format";
+import { TYPE_LABEL, TYPE_STYLE } from "@/lib/format";
 
 export function generateStaticParams() {
   return model.accounts.map((a) => ({ id: a.id }));
@@ -24,7 +25,6 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
   const done = sigs.filter((s) => s.status === "done" && !["competitor", "status_change"].includes(s.type));
   const suggestions = model.suggestions.filter((s) => s.account_id === a.id);
   const docs = model.docs.filter((d) => a.doc_ids.includes(d.id)).sort((x, y) => y.date.localeCompare(x.date));
-  const stageChanged = a.in_crm && a.ai_stage !== a.crm_stage;
 
   const about = [
     { icon: "🏢", label: "Who they are", text: a.about },
@@ -49,19 +49,6 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
             {a.lead_ids.length > 0 ? <> · {a.lead_ids.join(", ")}</> : <span className="ml-1 font-medium text-amber-700">· Not in CRM yet</span>}
           </div>
         </div>
-        <div className="flex items-center gap-6 text-sm">
-          <div><div className="text-xs text-slate-500">Value</div><div className="text-lg font-semibold">{money(a.value_usd)}</div></div>
-          <div>
-            <div className="text-xs text-slate-500">Owner</div>
-            {a.owner ? (
-              <div className="flex items-center gap-1.5 font-medium">
-                <span className={`grid h-6 w-6 place-items-center rounded-full text-[10px] font-semibold text-white ${OWNER_COLOR[a.owner] || "bg-slate-400"}`}>{initials(a.owner)}</span>
-                {a.owner}
-              </div>
-            ) : <div className="font-medium text-rose-600">Unassigned</div>}
-          </div>
-          <div><div className="text-xs text-slate-500">Last contact</div><div className="font-medium">{a.last_touch ? `${a.days_since_touch}d ago` : "never"}</div></div>
-        </div>
       </div>
 
       {/* 1. About this lead */}
@@ -77,26 +64,38 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
         </div>
       </section>
 
-      {/* 2. Status + next steps */}
-      <section className="card p-5">
-        <div className="flex flex-wrap items-center gap-2">
-          <h2 className="mr-2 font-semibold text-slate-900">Status &amp; next steps</h2>
-          <span className={`chip ${STAGE_STYLE[a.ai_stage]}`}>{a.ai_stage}</span>
-          {stageChanged && <span className="text-xs text-slate-500">CRM still says <b>{a.crm_stage}</b> — update suggested below</span>}
-        </div>
-        {a.stage_reason && <p className="mt-2 text-sm text-slate-600">{a.stage_reason}</p>}
-        {a.next_best_action && (
-          <div className="mt-3 rounded-lg bg-indigo-600 px-4 py-3 text-sm text-white">
-            <span className="font-semibold">Next step: </span>{a.next_best_action}
-          </div>
+      {/* 2. Status + next steps (live: stage track, profile completeness, activity) */}
+      <LeadStatusPanel
+        id={a.id}
+        aiStage={a.ai_stage}
+        crmStage={a.in_crm ? a.crm_stage : "Not in CRM"}
+        stageReason={a.stage_reason}
+        nextStep={a.next_best_action}
+        lastTouch={a.last_touch}
+        itemIds={followUps.map((r) => r.signal_id)}
+        fields={{
+          contact_name: a.contact_name,
+          contact_email: a.contact_email,
+          source: a.crm?.source || "",
+          service_interest: a.service_interest,
+          est_value_usd: a.value_usd != null ? String(a.value_usd) : "",
+          owner: a.owner,
+          next_followup_date: a.crm?.next_followup_date || "",
+          notes: a.crm?.notes || "",
+        }}
+        aiSuggestions={Object.fromEntries(
+          suggestions
+            .filter((s) => ["service_interest", "est_value_usd", "owner", "contact_email", "notes", "next_followup_date"].includes(s.field))
+            .map((s) => [s.field, { value: s.proposed, quote: s.quote }]),
         )}
+      >
         {a.duplicate_of.length > 0 && <MergeBanner id={a.id} others={a.duplicate_of} note={a.duplicate_note} />}
-        <h3 className="mb-1 mt-5 text-sm font-semibold text-slate-700">Open follow-ups ({followUps.length})</h3>
+        <h3 className="mb-1 mt-5 text-sm font-semibold text-slate-700">Follow-ups ({followUps.length})</h3>
         <div className="divide-y divide-slate-100 rounded-lg border border-slate-200">
-          {followUps.map((r) => <FollowUpRow key={r.signal_id} r={r} showCompany={false} />)}
+          {followUps.map((r) => <FollowUpRow key={r.signal_id} r={r} showCompany={false} stage={a.ai_stage} />)}
           {followUps.length === 0 && <div className="px-4 py-3 text-sm text-slate-500">Nothing open — no follow-ups found for this lead.</div>}
         </div>
-      </section>
+      </LeadStatusPanel>
 
       {/* 3. Details in tabs */}
       <LeadTabs

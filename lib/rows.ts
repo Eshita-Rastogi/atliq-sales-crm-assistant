@@ -1,8 +1,19 @@
 import type { LeadRow } from "@/components/LeadTable";
 import { model } from "./model";
+import { completeness } from "./stage";
 
 export function leadRows(): LeadRow[] {
   return model.accounts.map((a) => {
+    const fields: Record<string, string> = {
+      contact_name: a.contact_name,
+      contact_email: a.contact_email,
+      source: a.crm?.source || "",
+      service_interest: a.service_interest,
+      est_value_usd: a.value_usd != null ? String(a.value_usd) : "",
+      owner: a.owner,
+      next_followup_date: a.crm?.next_followup_date || "",
+      notes: a.crm?.notes || "",
+    };
     const items = model.radar.filter((r) => r.account_id === a.id && r.due_date).sort((x, y) => x.due_date!.localeCompare(y.due_date!));
     return {
       id: a.id,
@@ -21,6 +32,8 @@ export function leadRows(): LeadRow[] {
       next_due: items[0]?.due_date ?? null,
       next_title: items[0]?.title ?? "",
       duplicate: a.duplicate_of.length > 0,
+      fields,
+      profile: completeness(fields).pct,
     };
   });
 }

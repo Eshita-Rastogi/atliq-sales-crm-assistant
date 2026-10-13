@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { inView, useAppState } from "./AppState";
 import { STAGES, type RadarItem, type Stage } from "@/lib/types";
+import { completeness } from "@/lib/stage";
 import { OWNER_COLOR, STAGE_BAR, TYPE_LABEL, fmtDate, initials, money } from "@/lib/format";
 
 export interface HomeAccount {
@@ -12,12 +13,20 @@ export interface HomeAccount {
   value: number | null;
   stage: Stage;
   in_crm: boolean;
+  fields: Record<string, string>;
 }
 
 const WEEK_END = "2026-07-17";
 
-export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem[]; accounts: HomeAccount[]; refDate: string; nextSteps: Record<string, string> }) {
-  const { owner, done, snoozed, customLeads } = useAppState();
+export function Home({ radar, accounts: baseAccounts, refDate, nextSteps }: { radar: RadarItem[]; accounts: HomeAccount[]; refDate: string; nextSteps: Record<string, string> }) {
+  const { owner, done, snoozed, customLeads, leadEdits } = useAppState();
+  let accounts = baseAccounts;
+  // Apply stage moves and edits made in the app
+  accounts = accounts.map((a) => {
+    const e = leadEdits[a.id];
+    const fields = { ...a.fields, ...(e?.fields || {}) };
+    return { ...a, stage: (e?.stage as Stage) || a.stage, owner: fields.owner ?? a.owner, value: fields.est_value_usd ? Number(fields.est_value_usd) : a.value, fields };
+  });
   const who = owner === "All" ? "team" : owner;
   const open = radar.filter((r) => !done[r.signal_id] && !snoozed[r.signal_id] && inView(owner, r.owner));
   const mine = accounts.filter((a) => inView(owner, a.owner));
@@ -49,14 +58,16 @@ export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem
     { label: "Win rate", value: `${winRate}%`, sub: "won ÷ (won + lost)", href: "/leads?view=list", tone: "text-slate-900" },
   ];
 
+  const incomplete = mine.filter((a) => a.in_crm && !["Won", "Lost"].includes(a.stage) && completeness(a.fields).pct < 70);
   const tiles = [
     { href: "/follow-ups?when=overdue", label: "Follow-ups overdue", value: String(overdue.length), sub: "client asks & our promises", tone: "text-rose-600" },
     { href: "/follow-ups?when=week", label: "Due this week", value: String(week.length), sub: "deadlines & follow-ups, next 7 days", tone: "text-amber-600" },
     { href: "/leads?view=list&filter=untracked", label: "New / untracked leads", value: String(untracked.length + fresh.length), sub: `${untracked.length} not in CRM · ${fresh.length} new`, tone: "text-indigo-600" },
+    { href: "/leads?view=list&filter=incomplete", label: "Incomplete lead profiles", value: String(incomplete.length), sub: "open deals missing key details", tone: "text-slate-700" },
   ];
 
   return (
-    <div className="mx-auto max-w-5xl space-y-8">
+    <div className="mx-auto flex max-w-5xl flex-col gap-8">
       <div className="flex flex-wrap items-start justify-between gap-3">
       <div>
         <h1 className="text-2xl font-semibold text-slate-900">{owner === "All" ? "Hi team" : `Hi ${owner}`} — here&apos;s your day</h1>
@@ -67,7 +78,7 @@ export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem
       <Link href="/leads/new" className="btn-primary px-3 py-1.5 text-sm">+ New lead</Link>
       </div>
 
-      <section>
+      <section className="order-3 md:order-none">
         <h2 className="mb-3 text-lg font-semibold text-slate-900">Sales overview</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {overview.map((t) => (
@@ -97,9 +108,9 @@ export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem
         </div>
       </section>
 
-      <section>
+      <section className="order-1 md:order-none">
       <h2 className="mb-3 text-lg font-semibold text-slate-900">Needs your attention</h2>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {tiles.map((t) => (
           <Link key={t.label} href={t.href} className="card group p-5 transition hover:border-indigo-300 hover:shadow-md">
             <div className="text-xs font-medium uppercase tracking-wide text-slate-500">{t.label}</div>
@@ -111,7 +122,7 @@ export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem
       </div>
       </section>
 
-      <section>
+      <section className="order-2 md:order-none">
         <div className="mb-3 flex items-end justify-between">
           <div>
             <h2 className="text-lg font-semibold text-slate-900">Top 5 actions for today</h2>

@@ -1,9 +1,12 @@
 import { Home } from "@/components/Home";
 import { fmtDate } from "@/lib/format";
 import { model } from "@/lib/model";
+import { leadRows } from "@/lib/rows";
 
 export default function Page() {
+  const fieldsById = Object.fromEntries(leadRows().map((r) => [r.id, r.fields || {}]));
   const accounts = model.accounts.map((a) => ({
+    fields: fieldsById[a.id] || {},
     id: a.id,
     company: a.company,
     owner: a.owner,

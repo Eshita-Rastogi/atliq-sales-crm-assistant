@@ -6,6 +6,16 @@ import { inView, useAppState } from "./AppState";
 import { LeadTable, type LeadRow } from "./LeadTable";
 import { PipelineBoard } from "./PipelineBoard";
 import { money } from "@/lib/format";
+import { completeness } from "@/lib/stage";
+import type { Stage } from "@/lib/types";
+
+export interface LiveItem {
+  signal_id: string;
+  account_id: string;
+  days_overdue: number;
+  due_date: string | null;
+  title: string;
+}
 
 const FILTERS = [
   { key: "all", label: "All", test: () => true },
@@ -15,13 +25,14 @@ const FILTERS = [
   { key: "unassigned", label: "No owner", test: (r: LeadRow) => !r.owner },
   { key: "stale", label: "No contact in 14+ days", test: (r: LeadRow) => !["Won", "Lost"].includes(r.ai_stage) && (r.days == null || r.days >= 14) },
   { key: "dupes", label: "Possible duplicates", test: (r: LeadRow) => r.duplicate },
+  { key: "incomplete", label: "Incomplete profiles", test: (r: LeadRow) => (r.profile ?? 100) < 70 },
 ];
 
-export function LeadsView({ rows: baseRows }: { rows: LeadRow[] }) {
+export function LeadsView({ rows: baseRows, items }: { rows: LeadRow[]; items: LiveItem[] }) {
   let rows = baseRows;
   const params = useSearchParams();
   const router = useRouter();
-  const { owner, customLeads, customItems, merges } = useAppState();
+  const { owner, customLeads, customItems, merges, done, snoozed, leadEdits } = useAppState();
   const dropped = new Set(merges.map((m) => m.drop));
   const added: LeadRow[] = customLeads.map((c) => {
     const items = customItems.filter((i) => i.account_id === c.id && i.due_date).sort((a, b) => a.due_date!.localeCompare(b.due_date!));
@@ -32,7 +43,26 @@ export function LeadsView({ rows: baseRows }: { rows: LeadRow[] }) {
       duplicate: false, href: `/leads/added?id=${c.id}`, added: true,
     };
   });
-  rows = [...added, ...rows.filter((r) => !dropped.has(r.id))];
+  // Apply what the team did in the app: completed follow-ups, stage moves and edited details.
+  rows = [...added, ...rows.filter((r) => !dropped.has(r.id))].map((r) => {
+    if (r.added) return r;
+    const e = leadEdits[r.id];
+    const open = items.filter((i) => i.account_id === r.id && !done[i.signal_id] && !snoozed[i.signal_id]).sort((a, b) => (a.due_date || "9999").localeCompare(b.due_date || "9999"));
+    const fields = { ...(r.fields || {}), ...(e?.fields || {}) };
+    return {
+      ...r,
+      ai_stage: (e?.stage as Stage) || r.ai_stage,
+      owner: fields.owner ?? r.owner,
+      value: fields.est_value_usd ? Number(fields.est_value_usd) : r.value,
+      open: open.length,
+      overdue: open.filter((i) => i.days_overdue > 0).length,
+      next_due: open[0]?.due_date ?? null,
+      next_title: open[0]?.title ?? "",
+      days: e?.last_contact ? 0 : r.days,
+      fields,
+      profile: completeness(fields).pct,
+    };
+  });
   const view = params.get("view") === "list" ? "list" : "board";
   const filter = FILTERS.find((f) => f.key === params.get("filter")) || FILTERS[0];
   // Untracked and unassigned leads have no owner yet — always show them so someone picks them up.

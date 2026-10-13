@@ -114,13 +114,7 @@ export function Shell({ children, radar, updates, refDate }: Props) {
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-slate-200 bg-white/95 px-4 py-3 backdrop-blur md:px-6">
-          <nav className="flex gap-1 overflow-x-auto text-xs md:hidden">
-            {[...NAV, ...MORE].map((n) => (
-              <Link key={n.href} href={n.href} className="whitespace-nowrap rounded-md border border-slate-200 px-2 py-1">
-                {n.label}
-              </Link>
-            ))}
-          </nav>
+          <Link href="/" className="font-semibold text-slate-900 md:hidden">AtliQ</Link>
           <div className="ml-auto flex items-center gap-2">
             {pending > 0 && (
               <Link href="/updates" className="hidden rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 hover:bg-indigo-100 sm:block" title="AI-suggested CRM changes waiting for approval">
@@ -145,7 +139,22 @@ export function Shell({ children, radar, updates, refDate }: Props) {
             </span>
           </div>
         </header>
-        <main className="flex-1 p-4 md:p-6">{children}</main>
+        <main className="flex-1 p-4 pb-24 md:p-6">{children}</main>
+        {/* Phone: bottom tab bar, like a native app */}
+        <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-slate-200 bg-white/95 backdrop-blur md:hidden">
+          {[...NAV, { href: "/more", label: "More", icon: "☰" }].map((n) => {
+            const active = n.href === "/" ? path === "/" : path.startsWith(n.href);
+            return (
+              <Link key={n.href} href={n.href} className={`relative flex flex-col items-center gap-0.5 py-2 text-[11px] ${active ? "text-indigo-700" : "text-slate-500"}`}>
+                <span className="text-lg leading-none">{n.icon}</span>
+                {n.label === "Leads & deals" ? "Leads" : n.label}
+                {n.href === "/follow-ups" && overdue > 0 && (
+                  <span className="absolute right-3 top-1 rounded-full bg-rose-500 px-1 text-[9px] font-bold text-white">{overdue}</span>
+                )}
+              </Link>
+            );
+          })}
+        </nav>
       </div>
     </div>
   );
