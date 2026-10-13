@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BackButton } from "@/components/BackButton";
 import { docById, model } from "@/lib/model";
 
 export function generateStaticParams() {
@@ -14,6 +15,7 @@ export default async function DocPage({ params }: { params: Promise<{ id: string
   const accounts = [...new Set(sigs.map((s) => s.account_id))].map((x) => model.accounts.find((a) => a.id === x)!).filter(Boolean);
   return (
     <div className="mx-auto max-w-3xl space-y-4">
+      <BackButton />
       <div className="text-xs text-slate-500">Source document · {d.kind === "email" ? "Email thread" : "Meeting notes"} · {d.date}</div>
       <h1 className="text-xl font-semibold text-slate-900">{d.title}</h1>
       <div className="flex flex-wrap gap-2">

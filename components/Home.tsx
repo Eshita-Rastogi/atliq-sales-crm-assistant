@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { inView, useAppState } from "./AppState";
-import type { RadarItem, Stage } from "@/lib/types";
-import { OWNER_COLOR, TYPE_LABEL, fmtDate, initials, money } from "@/lib/format";
+import { STAGES, type RadarItem, type Stage } from "@/lib/types";
+import { OWNER_COLOR, STAGE_BAR, TYPE_LABEL, fmtDate, initials, money } from "@/lib/format";
 
 export interface HomeAccount {
   id: string;
@@ -32,8 +32,24 @@ export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem
     .filter((r) => (seen.has(r.account_id) ? false : (seen.add(r.account_id), true)))
     .slice(0, 5);
 
+  const myAdded = customLeads.filter((c) => inView(owner, c.owner));
+  const sum = (xs: { value: number | null }[]) => xs.reduce((t, a) => t + (a.value || 0), 0);
+  const won = mine.filter((a) => a.stage === "Won");
+  const lost = mine.filter((a) => a.stage === "Lost");
+  const openDeals = [...live, ...myAdded.map((c) => ({ value: c.value }))];
+  const total = mine.length + myAdded.length;
+  const winRate = won.length + lost.length ? Math.round((100 * won.length) / (won.length + lost.length)) : 0;
+  const byStage = STAGES.map((s) => ({ s, n: mine.filter((a) => a.stage === s).length + (s === "New" ? myAdded.length : 0) })).filter((x) => x.n);
+
+  const overview = [
+    { label: "Total leads", value: String(total), sub: "in your pipeline", href: "/leads", tone: "text-slate-900" },
+    { label: "Open — yet to close", value: String(openDeals.length), sub: `${money(sum(openDeals))} in play`, href: "/leads?filter=active", tone: "text-indigo-700" },
+    { label: "Closed won", value: String(won.length), sub: `${money(sum(won))} revenue won`, href: "/leads?view=list", tone: "text-emerald-600" },
+    { label: "Closed lost", value: String(lost.length), sub: `${money(sum(lost))} lost`, href: "/leads?view=list", tone: "text-rose-600" },
+    { label: "Win rate", value: `${winRate}%`, sub: "won ÷ (won + lost)", href: "/leads?view=list", tone: "text-slate-900" },
+  ];
+
   const tiles = [
-    { href: "/leads", label: "Open pipeline", value: money(live.reduce((t, a) => t + (a.value || 0), 0)), sub: `${live.length} deals in play`, tone: "text-slate-900" },
     { href: "/follow-ups?when=overdue", label: "Follow-ups overdue", value: String(overdue.length), sub: "client asks & our promises", tone: "text-rose-600" },
     { href: "/follow-ups?when=week", label: "Due this week", value: String(week.length), sub: "deadlines & follow-ups, next 7 days", tone: "text-amber-600" },
     { href: "/leads?view=list&filter=untracked", label: "New / untracked leads", value: String(untracked.length + fresh.length), sub: `${untracked.length} not in CRM · ${fresh.length} new`, tone: "text-indigo-600" },
@@ -51,7 +67,39 @@ export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem
       <Link href="/leads/new" className="btn-primary px-3 py-1.5 text-sm">+ New lead</Link>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <section>
+        <h2 className="mb-3 text-lg font-semibold text-slate-900">Sales overview</h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {overview.map((t) => (
+            <Link key={t.label} href={t.href} className="card p-4 transition hover:border-indigo-300 hover:shadow-md">
+              <div className="text-[11px] font-medium uppercase tracking-wide text-slate-500">{t.label}</div>
+              <div className={`mt-1 text-2xl font-semibold ${t.tone}`}>{t.value}</div>
+              <div className="text-xs text-slate-500">{t.sub}</div>
+            </Link>
+          ))}
+        </div>
+        <div className="card mt-3 p-4">
+          <div className="mb-2 flex items-center justify-between text-xs text-slate-500">
+            <span className="font-medium text-slate-700">Deals by stage</span>
+            <Link href="/leads" className="text-indigo-600 hover:underline">Open stage board →</Link>
+          </div>
+          <div className="flex h-3 overflow-hidden rounded-full bg-slate-100">
+            {byStage.map((x) => (
+              <div key={x.s} className={STAGE_BAR[x.s]} style={{ width: `${(100 * x.n) / Math.max(1, total)}%` }} title={`${x.s}: ${x.n}`} />
+            ))}
+          </div>
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600">
+            {byStage.map((x) => (
+              <span key={x.s} className="flex items-center gap-1.5"><span className={`h-2 w-2 rounded-full ${STAGE_BAR[x.s]}`} />{x.s} <b>{x.n}</b></span>
+            ))}
+          </div>
+          <p className="mt-2 text-[11px] text-slate-400">Revenue uses the estimated deal values in the CRM; stages are the real stage from emails and meetings.</p>
+        </div>
+      </section>
+
+      <section>
+      <h2 className="mb-3 text-lg font-semibold text-slate-900">Needs your attention</h2>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {tiles.map((t) => (
           <Link key={t.label} href={t.href} className="card group p-5 transition hover:border-indigo-300 hover:shadow-md">
             <div className="text-xs font-medium uppercase tracking-wide text-slate-500">{t.label}</div>
@@ -61,6 +109,7 @@ export function Home({ radar, accounts, refDate, nextSteps }: { radar: RadarItem
           </Link>
         ))}
       </div>
+      </section>
 
       <section>
         <div className="mb-3 flex items-end justify-between">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useAppState } from "@/components/AppState";
+import { BackButton } from "@/components/BackButton";
 import { FollowUpRow } from "@/components/FollowUpRow";
 import { money } from "@/lib/format";
 
@@ -15,7 +16,7 @@ function AddedLead() {
   const items = customItems.filter((i) => i.account_id === lead.id);
   return (
     <div className="mx-auto max-w-4xl space-y-5">
-      <div className="text-xs text-slate-500"><Link href="/leads" className="hover:underline">Leads &amp; deals</Link> / {lead.company}</div>
+      <div className="flex items-center gap-3 text-xs text-slate-500"><BackButton /><span><Link href="/leads" className="hover:underline">Leads &amp; deals</Link> / {lead.company}</span></div>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold text-slate-900">{lead.company}</h1>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BackButton } from "@/components/BackButton";
 import { DocCard } from "@/components/DocCard";
 import { FollowUpRow } from "@/components/FollowUpRow";
 import { LeadTabs } from "@/components/LeadTabs";
@@ -33,8 +34,9 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
 
   return (
     <div className="mx-auto max-w-5xl space-y-5">
-      <div className="text-xs text-slate-500">
-        <Link href="/leads" className="hover:underline">Leads &amp; deals</Link> / {a.company}
+      <div className="flex items-center gap-3 text-xs text-slate-500">
+        <BackButton />
+        <span><Link href="/" className="hover:underline">Home</Link> / <Link href="/leads" className="hover:underline">Leads &amp; deals</Link> / {a.company}</span>
       </div>
 
       {/* Header */}

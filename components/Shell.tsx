@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { inView, useAppState } from "./AppState";
+import { NotificationBell, type Notice } from "./NotificationBell";
 import { OWNER_COLOR } from "@/lib/format";
 
 interface Props {
   children: React.ReactNode;
-  radar: { id: string; owner: string; overdue: number }[];
+  radar: Notice[];
   updates: { id: string; owner: string }[];
   refDate: string;
 }
@@ -17,6 +18,12 @@ const NAV = [
   { href: "/follow-ups", label: "Follow-ups", icon: "🔔" },
   { href: "/leads", label: "Leads & deals", icon: "▦" },
   { href: "/ask", label: "Ask AI", icon: "✦" },
+];
+
+const MORE = [
+  { href: "/sources", label: "Data sources", icon: "ⓘ" },
+  { href: "/settings/reminders", label: "Reminder settings", icon: "⏰" },
+  { href: "/updates", label: "CRM review & log", icon: "✓" },
 ];
 
 const PEOPLE = [
@@ -74,7 +81,8 @@ export function Shell({ children, radar, updates, refDate }: Props) {
           <div className="text-xs text-slate-400">Sales &amp; CRM Assistant</div>
         </div>
         <nav className="flex-1 py-3">
-          {NAV.map((n) => {
+          {[...NAV, null, ...MORE].map((n, i) => {
+            if (!n) return <div key={`sep-${i}`} className="mx-5 my-3 border-t border-slate-800" />;
             const active = n.href === "/" ? path === "/" : path.startsWith(n.href);
             return (
               <Link
@@ -89,14 +97,13 @@ export function Shell({ children, radar, updates, refDate }: Props) {
                 {n.href === "/follow-ups" && overdue > 0 && (
                   <span className="rounded-full bg-rose-500 px-1.5 text-[11px] font-semibold text-white">{overdue}</span>
                 )}
+                {n.href === "/updates" && pending > 0 && (
+                  <span className="rounded-full bg-indigo-500 px-1.5 text-[11px] font-semibold text-white">{pending}</span>
+                )}
               </Link>
             );
           })}
         </nav>
-        <div className="border-t border-slate-800 px-5 py-3 text-xs">
-          <Link href="/sources" className={`block py-1 ${path.startsWith("/sources") ? "text-white" : "text-slate-400 hover:text-slate-200"}`}>ⓘ Data sources</Link>
-          <Link href="/updates" className={`block py-1 ${path.startsWith("/updates") ? "text-white" : "text-slate-400 hover:text-slate-200"}`}>✓ CRM review &amp; audit log</Link>
-        </div>
         <div className="border-t border-slate-800 px-5 py-4 text-[11px] leading-relaxed text-slate-500">
           Data snapshot: <span className="text-slate-300">{refDate}</span>
           <br />
@@ -107,7 +114,7 @@ export function Shell({ children, radar, updates, refDate }: Props) {
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-slate-200 bg-white/95 px-4 py-3 backdrop-blur md:px-6">
           <nav className="flex gap-1 overflow-x-auto text-xs md:hidden">
-            {NAV.map((n) => (
+            {[...NAV, ...MORE].map((n) => (
               <Link key={n.href} href={n.href} className="whitespace-nowrap rounded-md border border-slate-200 px-2 py-1">
                 {n.label}
               </Link>
@@ -119,12 +126,7 @@ export function Shell({ children, radar, updates, refDate }: Props) {
                 Review CRM updates · {pending}
               </Link>
             )}
-            <Link href="/follow-ups?when=overdue" className="relative rounded-full p-2 hover:bg-slate-100" aria-label="Overdue follow-ups">
-              <span className="text-lg">🔔</span>
-              {overdue > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 rounded-full bg-rose-500 px-1.5 text-[10px] font-bold text-white">{overdue}</span>
-              )}
-            </Link>
+            <NotificationBell items={radar} />
             <select
               value={owner}
               onChange={(e) => setOwner(e.target.value)}

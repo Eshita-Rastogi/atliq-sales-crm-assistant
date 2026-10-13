@@ -12,7 +12,8 @@ Start by picking who you are (Bhavin, Dhaval, Karandeep, Jay or *Whole team*); e
 
 | Screen | What it shows |
 |---|---|
-| **Home** | Four clickable numbers — open pipeline, follow-ups overdue, due this week, new / untracked leads — and the **top 5 actions for today** (one per deal, with the AI's suggested next step). |
+| **Home** | **Sales overview** (total leads, open — yet to close, closed won with revenue, closed lost, win rate, deals by stage), **needs your attention** (follow-ups overdue, due this week, new / untracked leads) and the **top 5 actions for today**. |
+| **🔔 Notifications & reminders** | Bell panel: escalated, overdue, due today, due soon, your reminders. **Reminder settings**: daily digest time, days before a due date, escalation after N days overdue, channels (in-app live; email / WhatsApp planned), with a digest preview. "Remind me" on every follow-up. |
 | **Follow-ups** 🔔 | Every open client ask, promise, deadline and revisit. View **by time** (Overdue · Today · This week · Later) or **by lead**; sort by priority or due date. Tick to mark done; expand a row for the source quote, the suggested next step and **Draft reply** / Snooze. |
 | **Leads & deals** | Stage board (New → Contacted → Qualified → Proposal Sent → Negotiation → Won / Re-engaged / Lost) or list, with filters: active, overdue, new / untracked, no owner, no contact in 14+ days, possible duplicates. |
 | **Lead page** | **About this lead** (who they are, why they're here, what they want) → **Status & next steps** (real stage, next step, open follow-ups) → tabs: **Activity** (emails & meeting MOMs), **AI insights**, **CRM details & updates** (approve / edit / reject). |

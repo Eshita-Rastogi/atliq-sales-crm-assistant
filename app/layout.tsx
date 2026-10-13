@@ -14,7 +14,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const radar = model.radar.map((r) => ({ id: r.signal_id, owner: r.owner, overdue: r.days_overdue }));
+  const radar = model.radar.map((r) => ({
+    id: r.signal_id, account_id: r.account_id, company: r.company, title: r.title, owner: r.owner, due_date: r.due_date, overdue: r.days_overdue,
+  }));
   const owners = Object.fromEntries(model.accounts.map((a) => [a.id, a.owner]));
   const updates = model.suggestions.map((s) => ({ id: s.id, owner: owners[s.account_id] || "" }));
   return (

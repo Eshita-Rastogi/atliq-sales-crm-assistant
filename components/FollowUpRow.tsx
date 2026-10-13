@@ -30,7 +30,7 @@ export function FollowUpRow({ r, nextStep, showCompany = true }: { r: RadarItem;
           <div className="flex flex-wrap items-center gap-x-2 text-xs text-slate-500">
             {showCompany && <span className="font-medium text-slate-700">{r.company}</span>}
             <span className={`rounded px-1 ${TYPE_STYLE[r.type]}`}>{TYPE_LABEL[r.type]}</span>
-            {snoozed[r.signal_id] && <span>· snoozed</span>}
+            {snoozed[r.signal_id] && <span className="text-indigo-600">· ⏰ reminder {fmtDate(snoozed[r.signal_id].slice(0, 10))}</span>}
           </div>
         </button>
         <div className="shrink-0 text-right text-xs">
@@ -71,7 +71,19 @@ export function FollowUpRow({ r, nextStep, showCompany = true }: { r: RadarItem;
           </div>
           <div className="flex flex-wrap gap-1.5 pt-1">
             {r.doc_id && <DraftButton signalId={r.signal_id} />}
-            {!closed && <button className="btn" onClick={() => snooze(r.signal_id)}>Snooze</button>}
+            {!closed && (
+              <select
+                className="btn"
+                value=""
+                onChange={(e) => e.target.value && snooze(r.signal_id, e.target.value)}
+                aria-label="Remind me later"
+              >
+                <option value="">⏰ Remind me…</option>
+                <option value="2026-07-11">Tomorrow (11 Jul)</option>
+                <option value="2026-07-13">In 3 days (13 Jul)</option>
+                <option value="2026-07-17">Next week (17 Jul)</option>
+              </select>
+            )}
             {!closed && <button className="btn-primary" onClick={() => markDone(r.signal_id)}>Mark done ✓</button>}
             {showCompany && (
               <Link href={r.account_id.startsWith("added-") ? `/leads/added?id=${r.account_id}` : `/leads/${encodeURIComponent(r.account_id)}`} className="btn">Open lead →</Link>

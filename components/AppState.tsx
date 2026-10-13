@@ -36,14 +36,30 @@ export interface Merge {
   by: string;
 }
 
+export interface ReminderSettings {
+  digestTime: string; // daily digest time
+  daysBefore: number; // remind this many days before a due date
+  escalateAfter: number; // escalate to founders when overdue this many days
+  channels: { inapp: boolean; email: boolean; whatsapp: boolean };
+}
+
+export const DEFAULT_REMINDERS: ReminderSettings = {
+  digestTime: "09:00",
+  daysBefore: 2,
+  escalateAfter: 3,
+  channels: { inapp: true, email: false, whatsapp: false },
+};
+
 interface State {
   ready: boolean;
+  reminders: ReminderSettings;
+  setReminders: (r: ReminderSettings) => void;
   owner: string | null; // null = not chosen yet; "All" = whole team
   setOwner: (o: string | null) => void;
   done: Record<string, string>;
   snoozed: Record<string, string>;
   markDone: (id: string) => void;
-  snooze: (id: string) => void;
+  snooze: (id: string, until?: string) => void; // until = ISO date to be reminded again
   undo: (id: string) => void;
   decisions: Record<string, Decision>;
   decide: (id: string, decision: "approved" | "rejected", value: string) => void;
@@ -68,6 +84,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   const [customLeads, setCustomLeads] = useState<CustomLead[]>([]);
   const [customItems, setCustomItems] = useState<RadarItem[]>([]);
   const [merges, setMerges] = useState<Merge[]>([]);
+  const [reminders, setReminders] = useState<ReminderSettings>(DEFAULT_REMINDERS);
 
   useEffect(() => {
     try {
@@ -79,6 +96,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
       setCustomLeads(s.customLeads || []);
       setCustomItems(s.customItems || []);
       setMerges(s.merges || []);
+      if (s.reminders) setReminders({ ...DEFAULT_REMINDERS, ...s.reminders });
     } catch {}
     setReady(true);
   }, []);
@@ -86,9 +104,9 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!ready) return;
     try {
-      localStorage.setItem(KEY, JSON.stringify({ owner, done, snoozed, decisions, customLeads, customItems, merges }));
+      localStorage.setItem(KEY, JSON.stringify({ owner, done, snoozed, decisions, customLeads, customItems, merges, reminders }));
     } catch {}
-  }, [owner, done, snoozed, decisions, customLeads, customItems, merges, ready]);
+  }, [owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, ready]);
 
   const now = () => new Date().toISOString();
   const by = !owner || owner === "All" ? "Founder" : owner;
@@ -100,12 +118,14 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
     <Ctx.Provider
       value={{
         ready,
+        reminders,
+        setReminders,
         owner,
         setOwner,
         done,
         snoozed,
         markDone: (id) => setDone((d) => ({ ...d, [id]: now() })),
-        snooze: (id) => setSnoozed((d) => ({ ...d, [id]: now() })),
+        snooze: (id, until) => setSnoozed((d) => ({ ...d, [id]: until || now().slice(0, 10) })),
         undo: (id) => {
           setDone(drop(id));
           setSnoozed(drop(id));
