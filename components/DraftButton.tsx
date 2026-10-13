@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Rate } from "./Rate";
 
 interface Draft {
   subject: string;
@@ -68,7 +69,8 @@ export function DraftButton({ signalId, label = "Draft reply" }: { signalId: str
                     ⚠ Not found in the thread — check before sending: {draft.unverified.join(", ")}
                   </div>
                 )}
-                <div className="flex justify-end gap-2">
+                <div className="flex items-center justify-end gap-3">
+                  <Rate id={`draft:${signalId}`} kind="Draft reply" />
                   <button
                     className="btn-primary"
                     onClick={() => {

@@ -25,6 +25,7 @@ const MORE = [
   { href: "/sources", label: "Data sources", icon: "ⓘ" },
   { href: "/settings/reminders", label: "Reminder settings", icon: "⏰" },
   { href: "/updates", label: "CRM review & log", icon: "✓" },
+  { href: "/about-ai", label: "How this AI works", icon: "✦" },
 ];
 
 const PEOPLE = [

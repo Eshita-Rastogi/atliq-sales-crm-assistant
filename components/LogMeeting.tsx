@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { BackButton } from "./BackButton";
 import { useAppState } from "./AppState";
+import { Rate } from "./Rate";
 import type { RadarItem } from "@/lib/types";
 import { fmtDate, money } from "@/lib/format";
 
@@ -240,6 +241,16 @@ export function LogMeeting({ leads }: { leads: { id: string; company: string; ow
           {recording && <span className="text-xs text-rose-600">● Recording… keep this screen open</span>}
           {transcribing && <span className="animate-pulse text-xs text-indigo-700">Transcribing…</span>}
         </div>
+        <details className="mt-3 rounded-lg bg-white p-3 text-xs text-slate-700 ring-1 ring-indigo-100">
+          <summary className="cursor-pointer font-medium text-indigo-800">📱 Only have your phone? How to capture each kind of meeting</summary>
+          <ul className="mt-2 space-y-1.5">
+            <li><b>In person:</b> record here — phone on the table, <b>keep the screen on</b> (switching apps or locking the phone can stop the recording).</li>
+            <li><b>Phone call on this phone:</b> the call uses the microphone, so this page can&apos;t record it. Use your phone&apos;s own call recorder (Android Phone app; iPhone call recording where available — it announces itself), then <b>⬆ Upload audio</b>. Or put the call on speaker and record on another device.</li>
+            <li><b>Zoom / Meet / Teams on your phone:</b> use the meeting&apos;s own recording and upload it — or, in production, invite <b>notetaker@atliq.com</b> and it joins for you.</li>
+            <li><b>Fastest for any meeting — the 1-minute debrief:</b> right after the call, tap ● Start and say the key points (budget, who decides, what you promised, by when). Works everywhere, stays well under the size limit.</li>
+            <li><b>Coming in production — call the AI in:</b> on a phone call, tap <b>Add call</b>, dial the AtliQ note-taker number and <b>Merge</b>; it announces itself, records, and files the minutes on the lead. Or send a voice note to AtliQ&apos;s WhatsApp number.</li>
+          </ul>
+        </details>
         <p className="mt-2 text-[11px] text-slate-500">
           Prototype limit: about 10–15 minutes per recording. Online meetings (Zoom / Meet / Teams): in production you invite the AtliQ note-taker to the calendar event and it joins, records and files the MOM automatically.
         </p>
@@ -291,7 +302,10 @@ export function LogMeeting({ leads }: { leads: { id: string; company: string; ow
         <section className="card space-y-4 p-4">
           <div>
             <div className="text-xs text-slate-500">{L?.company} · {fmtDate(date)}</div>
-            <h2 className="text-lg font-semibold text-slate-900">{res.title}</h2>
+            <div className="flex items-center justify-between gap-2">
+              <h2 className="text-lg font-semibold text-slate-900">{res.title}</h2>
+              <Rate id={`mom:${lead}:${date}:${res.title}`} kind="Meeting minutes" />
+            </div>
             <p className="mt-1 text-sm text-slate-700">{res.summary}</p>
             {res.highlights.length > 0 && (
               <ul className="mt-2 flex flex-wrap gap-1.5">{res.highlights.map((h) => <li key={h} className="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-700">{h}</li>)}</ul>

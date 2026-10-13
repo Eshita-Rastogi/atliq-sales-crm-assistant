@@ -7,6 +7,7 @@ import { LeadStatusPanel } from "@/components/LeadStatusPanel";
 import { LeadTabs } from "@/components/LeadTabs";
 import { LiveFollowUps, LiveMeetings } from "@/components/LiveLeadExtras";
 import { MergeBanner } from "@/components/MergeBanner";
+import { Rate } from "@/components/Rate";
 import { SuggestionRow } from "@/components/SuggestionRow";
 import { accountById, model } from "@/lib/model";
 import { TYPE_LABEL, TYPE_STYLE } from "@/lib/format";
@@ -55,7 +56,10 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
 
       {/* 1. About this lead */}
       <section className="card p-5">
-        <h2 className="mb-3 font-semibold text-slate-900">About this lead</h2>
+        <div className="mb-3 flex items-center justify-between gap-2">
+          <h2 className="font-semibold text-slate-900">About this lead <span className="ml-1 rounded bg-indigo-50 px-1.5 py-0.5 text-[10px] font-medium text-indigo-700">✦ AI</span></h2>
+          <Rate id={`profile:${a.id}`} kind="Lead profile" />
+        </div>
         <div className="grid gap-4 sm:grid-cols-3">
           {about.map((x) => (
             <div key={x.label}>
@@ -124,7 +128,7 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
                 <div className="card p-4">
                   <div className="mb-1 flex items-center justify-between">
                     <h3 className="font-semibold text-indigo-900">✦ Summary</h3>
-                    <span className="text-[11px] text-slate-400">from {a.doc_ids.length} source{a.doc_ids.length === 1 ? "" : "s"} · {model.models.reason}</span>
+                    <span className="flex items-center gap-3 text-[11px] text-slate-400">from {a.doc_ids.length} source{a.doc_ids.length === 1 ? "" : "s"} · {model.models.reason} <Rate id={`summary:${a.id}`} kind="Account summary" /></span>
                   </div>
                   <p className="text-sm leading-relaxed text-slate-800">{a.summary}</p>
                   {a.highlights.length > 0 && (

@@ -83,8 +83,18 @@ export interface LoggedMeeting {
   at: string;
 }
 
+export interface Feedback {
+  id: string; // what was rated, e.g. "nextstep:L-1003"
+  kind: string;
+  vote: "up" | "down";
+  at: string;
+  by: string;
+}
+
 interface State {
   ready: boolean;
+  feedback: Record<string, Feedback>;
+  rate: (id: string, kind: string, vote: "up" | "down") => void;
   meetings: LoggedMeeting[];
   addMeeting: (m: Omit<LoggedMeeting, "by" | "at">, items: RadarItem[], fields?: Record<string, string>) => void;
   outcomes: Record<string, Outcome>;
@@ -133,6 +143,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   const [leadEdits, setLeadEdits] = useState<Record<string, LeadEdit>>({});
   const [activity, setActivity] = useState<Record<string, Activity[]>>({});
   const [meetings, setMeetings] = useState<LoggedMeeting[]>([]);
+  const [feedback, setFeedback] = useState<Record<string, Feedback>>({});
 
   useEffect(() => {
     try {
@@ -150,6 +161,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
       setLeadEdits(s.leadEdits || {});
       setActivity(s.activity || {});
       setMeetings(s.meetings || []);
+      setFeedback(s.feedback || {});
     } catch {}
     setReady(true);
   }, []);
@@ -157,9 +169,9 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!ready) return;
     try {
-      localStorage.setItem(KEY, JSON.stringify({ owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, outcomes, remindAt, leadEdits, activity, meetings }));
+      localStorage.setItem(KEY, JSON.stringify({ owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, outcomes, remindAt, leadEdits, activity, meetings, feedback }));
     } catch {}
-  }, [owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, outcomes, remindAt, leadEdits, activity, meetings, ready]);
+  }, [owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, outcomes, remindAt, leadEdits, activity, meetings, feedback, ready]);
 
   const now = () => new Date().toISOString();
   const by = !owner || owner === "All" ? "Founder" : owner;
@@ -178,6 +190,9 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
     <Ctx.Provider
       value={{
         ready,
+        feedback,
+        rate: (id, kind, vote) =>
+          setFeedback((f) => (f[id]?.vote === vote ? Object.fromEntries(Object.entries(f).filter(([k]) => k !== id)) : { ...f, [id]: { id, kind, vote, at: now(), by } })),
         meetings,
         addMeeting: (m, items, fields) => {
           setMeetings((x) => [{ ...m, by, at: now() }, ...x]);
@@ -252,6 +267,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
           setLeadEdits({});
           setActivity({});
           setMeetings([]);
+          setFeedback({});
         },
       }}
     >

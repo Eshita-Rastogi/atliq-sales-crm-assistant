@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useAppState } from "./AppState";
+import { Rate } from "./Rate";
 import { PIPELINE, PROFILE_FIELDS, completeness } from "@/lib/stage";
 import type { Stage } from "@/lib/types";
 import { OWNER_COLOR, STAGE_STYLE, fmtDate, initials, money } from "@/lib/format";
@@ -120,8 +121,9 @@ export function LeadStatusPanel(p: Props) {
           </div>
         ) : (
           p.nextStep && (
-            <div className="mt-3 rounded-lg bg-indigo-600 px-4 py-3 text-sm text-white">
-              <span className="font-semibold">Next step: </span>{p.nextStep}
+            <div className="mt-3 flex flex-wrap items-start gap-2 rounded-lg bg-indigo-600 px-4 py-3 text-sm text-white">
+              <span className="min-w-0 flex-1"><span className="font-semibold">✦ AI next step: </span>{p.nextStep}</span>
+              <Rate id={`nextstep:${p.id}`} kind="Next step" dark />
             </div>
           )
         )}

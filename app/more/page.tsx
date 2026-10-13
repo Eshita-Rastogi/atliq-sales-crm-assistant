@@ -7,6 +7,7 @@ const LINKS = [
   { href: "/settings/reminders", label: "⏰ Reminder settings", sub: "Digest time, reminders, escalation" },
   { href: "/updates", label: "✓ CRM review & log", sub: "Approve AI-suggested CRM changes" },
   { href: "/sources", label: "ⓘ Data sources", sub: "Where the data comes from" },
+  { href: "/about-ai", label: "✦ How this AI works", sub: "What it can and can't do, accuracy, your controls" },
 ];
 
 export default function MorePage() {

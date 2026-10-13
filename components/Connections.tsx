@@ -40,6 +40,21 @@ const SOURCES: Source[] = [
     cta: "Open meeting recorder",
   },
   {
+    key: "callin",
+    name: "Call the AI into a phone call",
+    icon: "📞",
+    tag: "Phone calls · one device",
+    reads: ["The audio of calls you merge it into", "Caller number, time and duration"],
+    never: ["Joins a call unless you add it", "Stays on silently — it announces itself to everyone on the call"],
+    steps: [
+      "During a client call, tap Add call and dial the AtliQ note-taker number (saved as a contact).",
+      "Tap Merge — the AI joins and says 'This call is being recorded by AtliQ's assistant'.",
+      "Hang up as usual — the minutes and follow-ups appear on the lead (matched by the client's number).",
+    ],
+    permissions: ["None on your phone — it's a normal 3-way call"],
+    note: "Planned for production (telephony service with call recording). Works with a single phone, Android or iPhone.",
+  },
+  {
     key: "notetaker",
     name: "AI note-taker for Zoom / Meet / Teams",
     icon: "🤖",
