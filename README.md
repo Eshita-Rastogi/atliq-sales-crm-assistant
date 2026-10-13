@@ -8,16 +8,16 @@ Capstone 1 · Codebasics AI PM · Eshita Rastogi. Built from the AI PRD (`AI PRD
 
 ## What you can do
 
+Start by picking who you are (Bhavin, Dhaval, Karandeep, Jay or *Whole team*); everything is then filtered to your deals. Switch anytime from the top bar.
+
 | Screen | What it shows |
 |---|---|
-| **Pipeline** | KPI strip (open pipeline, won, lost, value waiting on AtliQ, overdue actions, leads missing from CRM) and a board with every stage. Toggle between the **AI view** (real stage from emails/notes) and **CRM as recorded**. |
-| **Today** 🔔 | Notifications / reminders: every open client ask, promise, deadline, revisit and growth signal, ranked by urgency, value and days waiting. Each shows the reason, the source quote, the next best step, and **Done / Snooze / Draft reply**. |
-| **Accounts** → Account 360 | One consolidated page per company: AI summary and highlights, next best step, open actions, a timeline of emails and meeting MOMs (with the extracted quotes highlighted), growth signals, the raw CRM record and suggested CRM updates. |
-| **Lead tracking** | Every lead with source, owner, CRM stage vs AI stage, value, last touch and next action due. Tabs: active, not in CRM, no owner, stale (14+ days), possible duplicates. |
-| **CRM updates** | Review queue of AI-proposed changes (new leads, status corrections, follow-up dates, duplicates) with **Approve / Edit / Reject** and an audit log. |
+| **Home** | Four clickable numbers — open pipeline, follow-ups overdue, due this week, new / untracked leads — and the **top 5 actions for today** (one per deal, with the AI's suggested next step). |
+| **Follow-ups** 🔔 | Every open client ask, promise, deadline and revisit. View **by time** (Overdue · Today · This week · Later) or **by lead**; sort by priority or due date. Tick to mark done; expand a row for the source quote, the suggested next step and **Draft reply** / Snooze. |
+| **Leads & deals** | Stage board (New → Contacted → Qualified → Proposal Sent → Negotiation → Won / Re-engaged / Lost) or list, with filters: active, overdue, new / untracked, no owner, no contact in 14+ days, possible duplicates. |
+| **Lead page** | **About this lead** (who they are, why they're here, what they want) → **Status & next steps** (real stage, next step, open follow-ups) → tabs: **Activity** (emails & meeting MOMs), **AI insights**, **CRM details & updates** (approve / edit / reject). |
 | **Ask AI** | Ask anything about the pipeline; answers cite the source document and say "Not found in the data" when unsupported. |
-
-Use **Viewing as** (top right) to switch between the whole team and one seller.
+| Review CRM updates | Top-bar badge: all AI-suggested CRM changes for your leads, with an audit log. |
 
 ## How it works
 

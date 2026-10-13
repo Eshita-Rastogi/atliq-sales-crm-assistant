@@ -1,6 +1,6 @@
 # Eval report — AtliQ Sales & CRM Assistant
 
-Generated 2026-10-13T15:30 · models: openai/gpt-oss-20b (extraction) / openai/gpt-oss-120b (reasoning) · reference date 2026-07-10
+Generated 2026-10-13T16:15 · models: openai/gpt-oss-20b (extraction) / openai/gpt-oss-120b (reasoning) · reference date 2026-07-10
 
 **12/12 checks passed**
 

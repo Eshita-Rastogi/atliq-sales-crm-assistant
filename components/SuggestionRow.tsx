@@ -32,7 +32,7 @@ export function SuggestionRow({ s, company }: { s: CrmSuggestion; company?: stri
         <div className="min-w-0 flex-1 basis-64">
           <div className="flex flex-wrap items-center gap-2 text-sm">
             {company && (
-              <Link href={`/accounts/${encodeURIComponent(s.account_id)}`} className="font-semibold text-slate-900 hover:text-indigo-700">
+              <Link href={`/leads/${encodeURIComponent(s.account_id)}`} className="font-semibold text-slate-900 hover:text-indigo-700">
                 {company}
               </Link>
             )}

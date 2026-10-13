@@ -15,11 +15,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const radar = model.radar.map((r) => ({ id: r.signal_id, owner: r.owner, overdue: r.days_overdue }));
+  const owners = Object.fromEntries(model.accounts.map((a) => [a.id, a.owner]));
+  const updates = model.suggestions.map((s) => ({ id: s.id, owner: owners[s.account_id] || "" }));
   return (
     <html lang="en">
       <body className={`${geist.className} antialiased`}>
         <AppStateProvider>
-          <Shell radar={radar} pendingUpdates={model.suggestions.length} refDate={fmtDate(model.reference_date)}>
+          <Shell radar={radar} updates={updates} refDate={fmtDate(model.reference_date)}>
             {children}
           </Shell>
         </AppStateProvider>

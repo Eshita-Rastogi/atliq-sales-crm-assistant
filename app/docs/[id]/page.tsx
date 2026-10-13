@@ -18,7 +18,7 @@ export default async function DocPage({ params }: { params: Promise<{ id: string
       <h1 className="text-xl font-semibold text-slate-900">{d.title}</h1>
       <div className="flex flex-wrap gap-2">
         {accounts.map((a) => (
-          <Link key={a.id} href={`/accounts/${encodeURIComponent(a.id)}`} className="chip border-indigo-200 bg-indigo-50 text-indigo-700">{a.company}</Link>
+          <Link key={a.id} href={`/leads/${encodeURIComponent(a.id)}`} className="chip border-indigo-200 bg-indigo-50 text-indigo-700">{a.company}</Link>
         ))}
       </div>
       {d.summary && <div className="card border-indigo-200 bg-indigo-50/40 p-4 text-sm"><b className="text-indigo-900">✦ AI summary:</b> {d.summary}</div>}

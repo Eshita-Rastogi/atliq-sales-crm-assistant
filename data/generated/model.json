@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T15:30:33.238Z",
+ "generated_at": "2026-10-13T16:15:02.078Z",
  "reference_date": "2026-07-10",
  "models": {
   "extract": "openai/gpt-oss-20b",
@@ -45,6 +45,9 @@
     "Cross‑sell opportunity: inventory forecasting for seasonal SKUs"
    ],
    "next_best_action": "Send the promised scope note for report automation to Priya today and schedule a discovery call to detail the inventory‑forecasting solution",
+   "about": "Acme Retail Group is a retail company with a focus on data-driven operations, currently using Power BI dashboards.",
+   "why_here": "They were referred to AtliQ by a source listed as \"Referral\" in the CRM record.",
+   "wants": "They want AtliQ to automate their monthly reporting pack and potentially address inventory forecasting for seasonal SKUs; budget not specified.",
    "doc_ids": [
     "2026-06-18_acme_retail_monthly_reports",
     "2026-06-24_acme_quarterly_review"
@@ -94,6 +97,9 @@
     "Scope: automated price‑data pipeline"
    ],
    "next_best_action": "Send the proposal today and confirm receipt with Harpreet Gill",
+   "about": "AgroLink is a company in the agriculture industry focused on mandi price data.",
+   "why_here": "They were referred to AtliQ through a conference (TechSummit).",
+   "wants": "They want an automated price‑data pipeline and a proposal by 10 July, with a budget of roughly $35‑$40k.",
    "doc_ids": [
     "2026-06-14_techsummit_debrief",
     "2026-07-01_agrolink_budget_call"
@@ -143,6 +149,9 @@
     "Next follow‑up due: 2026-04-03"
    ],
    "next_best_action": "Send a personalized follow‑up email or call to re‑engage Ravi Shankar today.",
+   "about": "Not stated in the CRM or conversations.",
+   "why_here": "Cold outreach from AtliQ.",
+   "wants": "Not stated in the CRM or conversations.",
    "doc_ids": [
     "2026-03-04_apexauto_cold_outreach"
    ],
@@ -191,6 +200,9 @@
     "Email needed to proceed"
    ],
    "next_best_action": "Obtain Farah's email address and send the approach note with pilot cost details",
+   "about": "BlueOrchid Hotels operates 12 properties and collects reviews on multiple platforms.",
+   "why_here": "They were referred to AtliQ after meeting Jay at TechSummit Mumbai.",
+   "wants": "They want sentiment and theme dashboards, possibly alerts, and a pilot with cost details.",
    "doc_ids": [
     "2026-06-19_blueorchid_call"
    ],
@@ -239,6 +251,9 @@
     "Service interest: Staff Augmentation"
    ],
    "next_best_action": "Send the promised case studies and reference to Fatima today and schedule a follow‑up call.",
+   "about": "ByteBridge is a company seeking staff augmentation services.",
+   "why_here": "They were referred to AtliQ and are comparing rates with a competitor.",
+   "wants": "They want concrete evidence such as case studies, retention numbers, and references to justify the higher cost to their CFO.",
    "doc_ids": [
     "2026-05-10_bytebridge_competitor"
    ],
@@ -282,6 +297,9 @@
    "summary": "No emails or meeting notes found for this account — CRM record only.",
    "highlights": [],
    "next_best_action": "Assign an owner and make first contact.",
+   "about": "Not stated in the CRM or conversations.",
+   "why_here": "Not stated in the CRM or conversations.",
+   "wants": "Not stated in the CRM or conversations.",
    "doc_ids": [],
    "last_touch": null,
    "days_since_touch": null,
@@ -328,6 +346,9 @@
     "Meeting scheduled 13 July"
    ],
    "next_best_action": "Send a meeting confirmation to Rakesh Gupta with a brief agenda and prepare discovery questions for the 13 July call",
+   "about": "Citywide Diagnostics operates 22 diagnostic centres and manages data across three separate systems.",
+   "why_here": "They were referred to AtliQ by Dr. Anita Rao at HealthFirst.",
+   "wants": "They want to integrate data engineering solutions to unify their data systems; budget not stated.",
    "doc_ids": [
     "2026-07-06_citywide_referral"
    ],
@@ -376,6 +397,9 @@
     "Two other proposals evaluated"
    ],
    "next_best_action": "Reply immediately confirming interest and the $40k estimate, and propose a brief call to finalize next steps.",
+   "about": "ClearPath Insurance is an insurance company.",
+   "why_here": "They were contacted via cold outreach and later reopened the project after a budget freeze.",
+   "wants": "They want confirmation that AtliQ is still interested and that the $40,000 estimate remains valid for the Q3 claims data warehouse project.",
    "doc_ids": [
     "2026-06-09_clearpath_budget_unfrozen"
    ],
@@ -424,6 +448,9 @@
     "References pending"
    ],
    "next_best_action": "Send the promised references today and ask if any additional information is needed before their decision",
+   "about": "CloudNine SaaS is a software-as-a-service company.",
+   "why_here": "They came to AtliQ via a website enquiry.",
+   "wants": "They want a rate card for senior backend and DevOps profiles and two references from SaaS companies, with a decision deadline of mid‑July.",
    "doc_ids": [
     "2026-06-21_cloudnine_rates_references"
    ],
@@ -472,6 +499,9 @@
     "Existing Won relationship"
    ],
    "next_best_action": "Conduct the 8 July call to finalize renewal terms and engineer requirements.",
+   "about": "DataNest is a technology company that provides data solutions, with a team of at least two engineers placed by AtliQ.",
+   "why_here": "They were referred to AtliQ and have an existing contract that was won.",
+   "wants": "They want to renew their contract early and add a third engineer with Kafka expertise, with a budget of $26,000 for the renewal.",
    "doc_ids": [
     "2026-06-30_datanest_renewal"
    ],
@@ -520,6 +550,9 @@
     "AI/ML Solutions interest"
    ],
    "next_best_action": "Send a personalized response with discovery questions and schedule a meeting before the mid‑August budget deadline",
+   "about": "EduSpark is an education technology company focused on student engagement solutions.",
+   "why_here": "They came to AtliQ via a website enquiry on 25 June.",
+   "wants": "They want an AI/ML solution for a student query chatbot, with a budget window closing mid‑August and the Dean of Digital Learning as the decision‑maker.",
    "doc_ids": [
     "2026-07-08_eduspark_website_enquiry"
    ],
@@ -568,6 +601,9 @@
     "Commercial call requested (due 9 Jul)"
    ],
    "next_best_action": "Schedule and conduct the commercial call with Suresh immediately to present pricing and move toward contract.",
+   "about": "FinEdge Bank is a financial institution operating in the banking sector.",
+   "why_here": "They were referred to AtliQ by Suresh Menon of FinEdge Bank.",
+   "wants": "They want a commercial call to discuss a data engineering engagement, with a budget of $95,000.",
    "doc_ids": [
     "2026-03-26_finedge_compliance_docs",
     "2026-06-27_harborfinch_referral_intro",
@@ -618,6 +654,9 @@
     "Follow‑up after July 15"
    ],
    "next_best_action": "Schedule a discovery call with Arjun after July 15 to capture detailed requirements, budget and timeline",
+   "about": "Not stated in the CRM or conversations.",
+   "why_here": "Referred via LinkedIn.",
+   "wants": "They want an ML-based credit scoring solution for thin-file customers with regulatory explainability.",
    "doc_ids": [
     "2026-06-30_finserve_intro_call"
    ],
@@ -666,6 +705,9 @@
     "Contact: Ananya Desai"
    ],
    "next_best_action": "Schedule a discovery call with Ananya Desai immediately to clarify requirements and budget.",
+   "about": "FreshCart is an online grocery startup.",
+   "why_here": "They were referred by Priya at Acme Retail.",
+   "wants": "They want a custom web app customer portal (orders, subscriptions, wallet) and need a decision by mid‑July.",
    "doc_ids": [
     "2026-05-18_freshcart_referral_followup",
     "2026-06-18_acme_retail_monthly_reports",
@@ -716,6 +758,9 @@
     "Interest in demand‑forecasting"
    ],
    "next_best_action": "Send Neha a detailed response on phasing options and demand‑forecasting capabilities, including any revised pricing.",
+   "about": "GlobalMart is a retail company seeking a custom web application.",
+   "why_here": "They were referred to AtliQ from a conference.",
+   "wants": "They want a proposal for a custom web app by the end of May, with a budget of $62,000 and potential scope adjustments for demand forecasting.",
    "doc_ids": [
     "2026-05-19_globalmart_demo",
     "2026-06-24_globalmart_pricing"
@@ -762,6 +807,9 @@
    "summary": "CRM note only: \"talked at techsummit about dashboards\". No emails or meeting notes found for this account.",
    "highlights": [],
    "next_best_action": "Jay: make first contact or close out this lead.",
+   "about": "GlobalMart is a company that operates in the retail industry, but its size or specific operations are not stated in the CRM or conversations.",
+   "why_here": "They came to AtliQ after attending a conference where they discussed dashboards with AtliQ representatives.",
+   "wants": "They want to negotiate the scope or price of Power BI Dashboards and have asked about demand forecasting; budget details are not stated in the CRM or conversations.",
    "doc_ids": [
     "2026-06-24_globalmart_pricing"
    ],
@@ -812,6 +860,9 @@
     "Scope: consolidate SCADA data into Power BI"
    ],
    "next_best_action": "Send the proposal by 17 July, including the SCADA API feasibility results.",
+   "about": "GreenGrid Solar is a solar energy company operating three solar farms in Karnataka with a combined capacity of approximately 180 MW.",
+   "why_here": "They discovered AtliQ through the company website and were referred by a website enquiry.",
+   "wants": "They want a Power BI performance monitoring dashboard for their three farms, with a phase‑1 budget of $20–25k and a board review deadline in September.",
    "doc_ids": [
     "2026-07-03_greengrid_new_lead",
     "2026-07-09_greengrid_discovery"
@@ -845,6 +896,9 @@
     "Meeting request due by 2026‑07‑11"
    ],
    "next_best_action": "Send a calendar invite to David Harbor to lock a meeting time this week",
+   "about": "Harbor & Finch is a company that produces approximately 120 manual client reports per quarter.",
+   "why_here": "They were referred to AtliQ by Suresh Menon of FineEdge.",
+   "wants": "They want to discuss automating client reporting with AtliQ in the next couple of weeks.",
    "doc_ids": [
     "2026-06-27_harborfinch_referral_intro"
    ],
@@ -893,6 +947,9 @@
     "Total contract value $30k"
    ],
    "next_best_action": "Contact Dr. Anita Rao before the board meeting to address any questions and ensure the proposal meets board expectations",
+   "about": "HealthFirst Clinics is a healthcare provider offering clinical services.",
+   "why_here": "They were referred to AtliQ by a referral source.",
+   "wants": "They want a custom web application with a phased pricing structure to fit a 20k budget cap, with Phase 1 at 18k and Phase 2 at 12k, and need board approval by 14 July.",
    "doc_ids": [
     "2026-04-20_healthfirst_board_update",
     "2026-07-06_citywide_referral",
@@ -943,6 +1000,9 @@
     "Scope: two‑plant dashboard, data from Tally & Access DB"
    ],
    "next_best_action": "Send the revised two‑plant quote by 15 July and change the CRM status to Re‑engaged.",
+   "about": "Kaveri Textiles is a textile manufacturing company.",
+   "why_here": "They re-engaged AtliQ after a vendor failure, following a cold outreach lead.",
+   "wants": "They want an updated Power BI dashboard quote for two plants by 15 July, with budget flexibility.",
    "doc_ids": [
     "2026-06-23_kaveri_vendor_failed",
     "2026-07-08_kaveri_demo_round2"
@@ -992,6 +1052,9 @@
     "Service interest: Power BI Dashboards"
    ],
    "next_best_action": "Prepare and send a detailed proposal outlining scope, timeline, and pricing",
+   "about": "LoopMart is a retail company operating three physical stores and an online storefront.",
+   "why_here": "They were introduced to AtliQ at a tech summit conference.",
+   "wants": "They want a phased Power BI dashboard solution with a budget ballpark of $18–22k.",
    "doc_ids": [
     "2026-06-14_techsummit_debrief",
     "2026-06-26_loopmart_pricing_call"
@@ -1025,6 +1088,9 @@
     "Initial contact by Carlos"
    ],
    "next_best_action": "Send the requested case study immediately and schedule a discovery call to clarify requirements and budget details.",
+   "about": "Not stated in the CRM or conversations.",
+   "why_here": "Meeting at TechSummit Mumbai last week.",
+   "wants": "Carlos from Lumino Fitness wants the member‑churn prediction case study and is currently budgeting for the next quarter.",
    "doc_ids": [
     "2026-06-20_lumino_fitness_case_study"
    ],
@@ -1073,6 +1139,9 @@
     "Interest in healthcare solutions"
    ],
    "next_best_action": "Send the requested intro deck and healthcare case studies to Rohit Bansal immediately and schedule a follow‑up call",
+   "about": "MEDTRACK LABS is a company in the healthcare industry.",
+   "why_here": "They came to AtliQ via a conference (TechSummit).",
+   "wants": "They want AtliQ’s intro deck and healthcare case studies.",
    "doc_ids": [
     "2026-06-13_medtrack_scribble"
    ],
@@ -1116,6 +1185,9 @@
    "summary": "CRM note only: \"met at techsummit booth, hospital data warehouse\". No emails or meeting notes found for this account.",
    "highlights": [],
    "next_best_action": "Jay: make first contact or close out this lead.",
+   "about": "Meridian Health LLC is a healthcare organization involved in hospital data warehousing.",
+   "why_here": "They were referred to AtliQ after meeting at a tech summit booth.",
+   "wants": "They want data engineering services; budget not stated in the CRM or conversations.",
    "doc_ids": [],
    "last_touch": null,
    "days_since_touch": null,
@@ -1164,6 +1236,9 @@
     "Estimated value $45,000"
    ],
    "next_best_action": "Assign an owner and reply to Sanjay's proposal questions today, confirming ingestion capabilities and timeline",
+   "about": "Meridian Healthcare is a healthcare organization seeking data engineering services.",
+   "why_here": "They came to AtliQ via a website enquiry.",
+   "wants": "They want a data engineering solution with an ingestion layer that can handle HL7 feeds, a 14‑week timeline including UAT, and a proposal finalized before their Q2 budget review in mid‑July.",
    "doc_ids": [
     "2026-06-16_meridian_proposal_questions",
     "2026-07-06_meridian_check",
@@ -1216,6 +1291,9 @@
     "Owner Dhaval leading"
    ],
    "next_best_action": "Prepare and send a detailed proposal/SOW for the UK triage assistant today",
+   "about": "MiraHealth is a healthcare company focused on patient triage solutions.",
+   "why_here": "They came to AtliQ via a website enquiry.",
+   "wants": "They want an AI/ML triage assistant scoped for UK operations first, with a verbal budget of approximately $35,000.",
    "doc_ids": [
     "2026-07-07_mirahealth_quick_summary"
    ],
@@ -1248,6 +1326,9 @@
     "Call needed before budget discussions"
    ],
    "next_best_action": "Schedule a discovery call with Nimbus Lending before 20 July",
+   "about": "Nimbus Lending is a lending company processing 4,000 loan applications monthly.",
+   "why_here": "They were referred to AtliQ by PayTrack.",
+   "wants": "They want an underwriting solution and a call before their budget discussions in the week of 20 July.",
    "doc_ids": [
     "2026-07-05_nimbus_lending_intro"
    ],
@@ -1296,6 +1377,9 @@
     "Cross‑sell opportunity identified"
    ],
    "next_best_action": "Send the promised dashboard concepts with a preliminary cost estimate to move toward a proposal.",
+   "about": "Northwind Logistics is a logistics company with a data pipeline live since November 2025.",
+   "why_here": "They were referred to AtliQ and are a won lead.",
+   "wants": "They want a Power BI dashboard layer on top of their existing data pipeline.",
    "doc_ids": [
     "2026-06-11_northwind_crosssell"
    ],
@@ -1344,6 +1428,9 @@
     "Scope: AI/ML solutions for trial document processing"
    ],
    "next_best_action": "Send the data‑handling & hosting details, three pharma references, and return the completed security questionnaire before 24 July.",
+   "about": "NovaPharma is a pharmaceutical company engaged in clinical trials and drug development.",
+   "why_here": "They were referred to AtliQ via LinkedIn and have engaged in a demo with the science team.",
+   "wants": "They want AI/ML solutions for document processing in trials, with a budget of $80,000 and a security questionnaire deadline of 24 July.",
    "doc_ids": [
     "2026-06-25_novapharma_stakeholders",
     "2026-06-30_novapharma_security_questionnaire",
@@ -1395,6 +1482,9 @@
     "No budget disclosed"
    ],
    "next_best_action": "Prepare discovery questions and send a pre‑call agenda to Karl before the 14 July meeting",
+   "about": "OceanFreight is a mid‑size shipping company.",
+   "why_here": "They came to AtliQ via a website enquiry.",
+   "wants": "They want a data engineering call scheduled for 14 July 8:00 CET.",
    "doc_ids": [
     "2026-06-28_oceanfreight_timezones"
    ],
@@ -1443,6 +1533,9 @@
     "No formal commitment yet"
    ],
    "next_best_action": "Send the requested merchant‑risk module one‑pager and schedule a follow‑up meeting before the end of August.",
+   "about": "PayTrack is a company that provides payment solutions and operates in the fintech industry.",
+   "why_here": "They were referred to AtliQ by PayTrack itself, as indicated by the referral source in the CRM record and the conversation about Nimbus Lending.",
+   "wants": "They want a one‑pager on a merchant‑risk module to share with leadership before their August planning cycle; they also have a fraud detection POC that could lead to a full build, with an estimated value of $71,000.",
    "doc_ids": [
     "2026-07-02_paytrack_phase2",
     "2026-07-05_nimbus_lending_intro"
@@ -1476,6 +1569,9 @@
     "Seeking white‑label partner"
    ],
    "next_best_action": "Assign an owner and reply with an introduction to the appropriate partner contact, proposing a discovery call.",
+   "about": "PixelWorks Agency is a 30‑person design agency.",
+   "why_here": "Not stated in the CRM or conversations.",
+   "wants": "They want a standing white‑label partner for recurring data dashboard and AI projects, potentially 3–4 per quarter.",
    "doc_ids": [
     "2026-06-29_pixelworks_partnership"
    ],
@@ -1524,6 +1620,9 @@
     "Service interest AI/ML Solutions"
    ],
    "next_best_action": "Contact James Whitfield to confirm the acquisition outcome and reopen the conversation.",
+   "about": "Quantia Analytics is a company that provides analytics services, but the exact industry or size is not specified in the CRM or conversations.",
+   "why_here": "They were referred to AtliQ, as indicated by the source field in the CRM record.",
+   "wants": "They are not currently seeking any services from AtliQ; the deal was lost due to timing issues with an upcoming acquisition, and no budget or project details were provided.",
    "doc_ids": [
     "2025-09-30_quantia_lost_deal"
    ],
@@ -1567,6 +1666,9 @@
    "summary": "CRM note only: \"chose PowerBI partner from their region\". No emails or meeting notes found for this account.",
    "highlights": [],
    "next_best_action": "Jay: make first contact or close out this lead.",
+   "about": "RetailOne is a retail company.",
+   "why_here": "They were sourced via LinkedIn.",
+   "wants": "They are interested in Power BI Dashboards with an estimated value of $22,000.",
    "doc_ids": [],
    "last_touch": "2025-11-28",
    "days_since_touch": 224,
@@ -1597,6 +1699,9 @@
     "Request past due date"
    ],
    "next_best_action": "Reach out to obtain the decision‑maker’s contact and schedule a discovery call",
+   "about": "Ridgeline Foods is a food company, but industry and size are not stated in the CRM or conversations.",
+   "why_here": "Not stated in the CRM or conversations.",
+   "wants": "They want a distributor ordering portal for about 200 distributors, similar to Sunrise Foods.",
    "doc_ids": [
     "2026-07-03_ridgeline_scribble"
    ],
@@ -1645,6 +1750,9 @@
     "Scope: recommendation engine"
    ],
    "next_best_action": "Send the statement of work to Elena Petrova no later than 15 July",
+   "about": "ShopSwift is a company seeking AI/ML solutions, specifically a recommendation engine.",
+   "why_here": "They were sourced via LinkedIn and have been contacted by AtliQ.",
+   "wants": "They want a statement of work by 15 July to secure a $55k budget for the recommendation engine.",
    "doc_ids": [
     "2026-06-29_shopswift_budget_confirmed",
     "2026-07-07_internal_prioritization"
@@ -1694,6 +1802,9 @@
     "Custom web app for banquet booking & invoicing"
    ],
    "next_best_action": "Send the call recap with indicative pricing and arrange the reference call with the past client.",
+   "about": "SmartServe Hospitality is a hospitality company focused on banquet booking and invoicing services.",
+   "why_here": "They were sourced via LinkedIn and reached out to AtliQ for a custom web app.",
+   "wants": "They want a custom web app with a tentative budget of $25,000 and milestone-based payments.",
    "doc_ids": [
     "2026-04-05_smartserve_intro_call"
    ],
@@ -1742,6 +1853,9 @@
     "Contact B.K. Verma is decision‑maker"
    ],
    "next_best_action": "Schedule a value‑walkthrough call with B.K. Verma to justify the pricing and address the freelancer comparison.",
+   "about": "SteelCore Industries is a manufacturing company that uses Power BI dashboards for data analysis.",
+   "why_here": "They were contacted via cold outreach by AtliQ.",
+   "wants": "They want a Power BI dashboard solution but are concerned about pricing compared to a cheaper freelancer quote.",
    "doc_ids": [
     "2026-02-05_steelcore_pricing_objection"
    ],
@@ -1790,6 +1904,9 @@
     "Previous portal delivered (won)"
    ],
    "next_best_action": "Schedule a discovery call with Meera Pillai to scope the v2 portal and dashboard requirements",
+   "about": "Sunrise Foods is a food distribution company that has grown its distributor network from 40 to 110.",
+   "why_here": "They were referred to AtliQ and have previously engaged with us for a distributor portal.",
+   "wants": "They want a v2 of their distributor portal and a sales dashboard to feed portal data, with no budget stated.",
    "doc_ids": [
     "2026-06-10_sunrise_foods_reactivation",
     "2026-07-02_internal_pipeline_review"
@@ -1834,6 +1951,9 @@
    "summary": "CRM note only: \"itinerary personalization idea, TechSummit\". No emails or meeting notes found for this account.",
    "highlights": [],
    "next_best_action": "Karandeep: make first contact or close out this lead.",
+   "about": "TravelHub is a travel industry company focused on itinerary personalization.",
+   "why_here": "They came to AtliQ via a conference referral at TechSummit.",
+   "wants": "They want AI/ML solutions to enhance itinerary personalization; budget not stated.",
    "doc_ids": [],
    "last_touch": null,
    "days_since_touch": null,
@@ -1880,6 +2000,9 @@
     "Decision-maker: board"
    ],
    "next_best_action": "Send the revised contract today and confirm the short call for July 9 to walk through terms",
+   "about": "Trustline NBFC is a non‑banking financial company focused on loan services.",
+   "why_here": "They came to AtliQ via a conference referral.",
+   "wants": "They want an annual license for AI/ML loan document automation, with ROI framing on hours saved per loan file; budget is $48,000.",
    "doc_ids": [
     "2026-06-03_trustline_negotiation",
     "2026-07-03_trustline_approved"
@@ -1929,6 +2052,9 @@
     "No response yet"
    ],
    "next_best_action": "Send a polite reminder email or call Kunal today to lock in a demo time.",
+   "about": "UrbanNest Realty is a real estate company.",
+   "why_here": "They were sourced via LinkedIn and contacted by AtliQ.",
+   "wants": "They are interested in a Custom Web App; budget not stated.",
    "doc_ids": [
     "2026-05-04_urbannest_no_response"
    ],
@@ -1977,6 +2103,9 @@
     "Owner: Jay"
    ],
    "next_best_action": "Schedule a follow‑up meeting with P. Naidu for early February to resume discovery",
+   "about": "Vertex Constructions is a construction company.",
+   "why_here": "They were contacted via cold outreach by AtliQ.",
+   "wants": "They want a custom web app; budget not stated in the CRM or conversations.",
    "doc_ids": [
     "2026-01-15_vertex_ooo_stall"
    ],
@@ -2025,6 +2154,9 @@
     "Scope: Power BI dashboards"
    ],
    "next_best_action": "Send the requested 3‑year TCO comparison by 2026-07-03 and note the competitor reference.",
+   "about": "VoltEnergy is a company that operates in the energy sector and is interested in Power BI dashboards.",
+   "why_here": "They came to AtliQ via a website enquiry.",
+   "wants": "They want a 3‑year TCO comparison between AtliQ’s Power BI solution and a Tableau consultancy to present to their board, with a budget of $28,000.",
    "doc_ids": [
     "2026-06-15_voltenergy_competitor"
    ],
@@ -2073,6 +2205,9 @@
     "Intro call scheduled (Wed 3pm IST)"
    ],
    "next_best_action": "Prepare and send a detailed staff augmentation proposal outlining pricing and timelines to Maya.",
+   "about": "Zenlytics is a company seeking staff augmentation services.",
+   "why_here": "They found AtliQ via LinkedIn and scheduled an intro call.",
+   "wants": "They want two data engineers with dbt + Snowflake experience to start in August; budget not stated.",
    "doc_ids": [
     "2026-06-03_zenlytics_intro_call"
    ],
@@ -4195,12 +4330,12 @@
  ],
  "radar": [
   {
-   "signal_id": "2026-03-26_finedge_compliance_docs#2",
+   "signal_id": "2026-03-26_finedge_compliance_docs#4",
    "account_id": "L-1023",
    "company": "FinEdge Bank",
    "owner": "Bhavin",
-   "type": "client_deadline",
-   "title": "Schedule commercial meeting",
+   "type": "meeting_action",
+   "title": "Confirm availability",
    "quote": "My assistant will find a slot the week of 29 June — please confirm your availability.",
    "doc_id": "2026-03-26_finedge_compliance_docs",
    "due_date": "2026-06-29",
@@ -4208,17 +4343,18 @@
    "days_waiting": 21,
    "value_usd": 95000,
    "score": 81,
-   "reason": "$95k · overdue 11d · waiting 21d",
+   "reason": "$95k · overdue 11d · waiting 21d · client deadline",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
-   "signal_id": "2026-06-29_shopswift_budget_confirmed#1",
+   "signal_id": "2026-06-29_shopswift_budget_confirmed#0",
    "account_id": "L-1017",
    "company": "ShopSwift",
    "owner": "Bhavin",
-   "type": "client_deadline",
-   "title": "Procurement deadline",
+   "type": "client_ask",
+   "title": "Provide SOW",
    "quote": "What I need from you: a statement of work by 15 July so I can push it through procurement before our finance team closes the quarter's commitments.",
    "doc_id": "2026-06-29_shopswift_budget_confirmed",
    "due_date": "2026-07-15",
@@ -4226,27 +4362,12 @@
    "days_waiting": 11,
    "value_usd": 55000,
    "score": 79,
-   "reason": "$55k · due 2026-07-15 · waiting 11d",
+   "reason": "$55k · due 2026-07-15 · waiting 11d · client deadline",
    "needs_review": false,
+   "also_docs": [
+    "2026-07-07_internal_prioritization"
+   ],
    "primary": true
-  },
-  {
-   "signal_id": "2026-07-07_internal_prioritization#2",
-   "account_id": "L-1017",
-   "company": "ShopSwift",
-   "owner": "Bhavin",
-   "type": "client_deadline",
-   "title": "SOW needed by 15 Jul",
-   "quote": "Elena needs SOW by 15 Jul or budget slips a quarter",
-   "doc_id": "2026-07-07_internal_prioritization",
-   "due_date": "2026-07-15",
-   "days_overdue": 0,
-   "days_waiting": 3,
-   "value_usd": 55000,
-   "score": 79,
-   "reason": "$55k · due 2026-07-15 · waiting 3d",
-   "needs_review": false,
-   "primary": false
   },
   {
    "signal_id": "2026-07-03_trustline_approved#0",
@@ -4264,6 +4385,7 @@
    "score": 77,
    "reason": "$48k · due 2026-07-10 · waiting 4d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4282,79 +4404,50 @@
    "score": 76,
    "reason": "$45k · due 2026-07-15 · waiting 24d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
-   "signal_id": "2026-07-07_internal_prioritization#4",
+   "signal_id": "2026-04-20_healthfirst_board_update#2",
    "account_id": "L-1009",
    "company": "HealthFirst Clinics",
    "owner": "Karandeep",
    "type": "client_deadline",
-   "title": "Board meeting 14 Jul",
-   "quote": "HealthFirst board meets 14 Jul",
-   "doc_id": "2026-07-07_internal_prioritization",
+   "title": "Board meeting 14 July",
+   "quote": "now scheduled for 14 July.",
+   "doc_id": "2026-04-20_healthfirst_board_update",
    "due_date": "2026-07-14",
    "days_overdue": 0,
-   "days_waiting": 3,
+   "days_waiting": 79,
    "value_usd": 30000,
    "score": 73,
-   "reason": "$30k · due 2026-07-14 · waiting 3d",
+   "reason": "$30k · due 2026-07-14 · waiting 79d",
    "needs_review": false,
+   "also_docs": [
+    "2026-07-07_internal_prioritization"
+   ],
    "primary": true
   },
   {
-   "signal_id": "2026-03-26_finedge_compliance_docs#4",
-   "account_id": "L-1023",
-   "company": "FinEdge Bank",
-   "owner": "Bhavin",
-   "type": "meeting_action",
-   "title": "Confirm availability",
-   "quote": "My assistant will find a slot the week of 29 June — please confirm your availability.",
-   "doc_id": "2026-03-26_finedge_compliance_docs",
-   "due_date": "2026-06-29",
-   "days_overdue": 11,
-   "days_waiting": 21,
-   "value_usd": 95000,
-   "score": 71,
-   "reason": "$95k · overdue 11d · waiting 21d",
-   "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-30_novapharma_security_questionnaire#1",
+   "signal_id": "2026-06-30_novapharma_security_questionnaire#0",
    "account_id": "L-1029",
    "company": "NovaPharma",
    "owner": "Bhavin",
-   "type": "client_deadline",
-   "title": "Security questionnaire deadline",
-   "quote": "We need the completed document back by 24 July to keep the procurement timeline.",
+   "type": "client_ask",
+   "title": "Complete security questionnaire",
+   "quote": "As Lisa flagged, attached is our vendor security questionnaire — 78 questions covering data handling, hosting, access control and incident response. We need the completed document back by 24 July to keep the procurement timeline.",
    "doc_id": "2026-06-30_novapharma_security_questionnaire",
    "due_date": "2026-07-24",
    "days_overdue": 0,
    "days_waiting": 9,
    "value_usd": 80000,
    "score": 70,
-   "reason": "$80k · due 2026-07-24 · waiting 9d",
+   "reason": "$80k · due 2026-07-24 · waiting 9d · client deadline",
    "needs_review": false,
+   "also_docs": [
+    "2026-07-07_internal_prioritization"
+   ],
    "primary": true
-  },
-  {
-   "signal_id": "2026-07-07_internal_prioritization#1",
-   "account_id": "L-1029",
-   "company": "NovaPharma",
-   "owner": "Bhavin",
-   "type": "client_deadline",
-   "title": "Security questionnaire due",
-   "quote": "security questionnaire due 24 Jul",
-   "doc_id": "2026-07-07_internal_prioritization",
-   "due_date": "2026-07-24",
-   "days_overdue": 0,
-   "days_waiting": 3,
-   "value_usd": 80000,
-   "score": 70,
-   "reason": "$80k · due 2026-07-24 · waiting 3d",
-   "needs_review": false,
-   "primary": false
   },
   {
    "signal_id": "2026-06-25_novapharma_stakeholders#0",
@@ -4372,42 +4465,7 @@
    "score": 69,
    "reason": "$80k · overdue 11d · waiting 15d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-25_novapharma_stakeholders#1",
-   "account_id": "L-1029",
-   "company": "NovaPharma",
-   "owner": "Bhavin",
-   "type": "client_ask",
-   "title": "Send three healthcare/pharma references",
-   "quote": "Emma will need three references from healthcare/pharma clients.",
-   "doc_id": "2026-06-25_novapharma_stakeholders",
-   "due_date": "2026-06-29",
-   "days_overdue": 11,
-   "days_waiting": 15,
-   "value_usd": 80000,
-   "score": 69,
-   "reason": "$80k · overdue 11d · waiting 15d",
-   "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-29_shopswift_budget_confirmed#0",
-   "account_id": "L-1017",
-   "company": "ShopSwift",
-   "owner": "Bhavin",
-   "type": "client_ask",
-   "title": "Provide SOW",
-   "quote": "What I need from you: a statement of work by 15 July so I can push it through procurement before our finance team closes the quarter's commitments.",
-   "doc_id": "2026-06-29_shopswift_budget_confirmed",
-   "due_date": "2026-07-15",
-   "days_overdue": 0,
-   "days_waiting": 11,
-   "value_usd": 55000,
-   "score": 69,
-   "reason": "$55k · due 2026-07-15 · waiting 11d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4426,6 +4484,7 @@
    "score": 67,
    "reason": "value unknown · due 2026-07-15 · waiting 4d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4444,6 +4503,7 @@
    "score": 67,
    "reason": "value unknown · due 2026-07-10 · waiting 2d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4462,6 +4522,7 @@
    "score": 67,
    "reason": "value unknown · due 2026-07-10 · waiting 9d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4480,6 +4541,7 @@
    "score": 66,
    "reason": "$95k · overdue 1d · waiting 3d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4498,6 +4560,7 @@
    "score": 65,
    "reason": "value unknown · due 2026-07-11 · waiting 13d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4516,6 +4579,7 @@
    "score": 65,
    "reason": "value unknown · due 2026-07-16 · waiting 10d",
    "needs_review": true,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4534,6 +4598,7 @@
    "score": 65,
    "reason": "$15k · due 2026-07-10 · waiting 2d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4552,6 +4617,7 @@
    "score": 64,
    "reason": "$54k · overdue 24d · waiting 27d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4570,6 +4636,7 @@
    "score": 64,
    "reason": "$54k · overdue 24d · waiting 27d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4588,6 +4655,7 @@
    "score": 64,
    "reason": "$54k · overdue 21d · waiting 27d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4606,6 +4674,7 @@
    "score": 62,
    "reason": "$62k · overdue 10d · waiting 14d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4624,6 +4693,7 @@
    "score": 61,
    "reason": "value unknown · overdue 22d · waiting 24d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4642,24 +4712,7 @@
    "score": 61,
    "reason": "$45k · overdue 22d · waiting 24d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-16_meridian_proposal_questions#1",
-   "account_id": "L-1003",
-   "company": "Meridian Healthcare",
-   "owner": "Bhavin",
-   "type": "client_ask",
-   "title": "Confirm UAT inclusion in timeline",
-   "quote": "The proposal quotes a 14-week timeline — does that include UAT with our clinicians, or is that on top?",
-   "doc_id": "2026-06-16_meridian_proposal_questions",
-   "due_date": "2026-06-18",
-   "days_overdue": 22,
-   "days_waiting": 24,
-   "value_usd": 45000,
-   "score": 61,
-   "reason": "$45k · overdue 22d · waiting 24d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4678,6 +4731,7 @@
    "score": 61,
    "reason": "value unknown · due 2026-07-13 · waiting 3d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4696,24 +4750,7 @@
    "score": 60,
    "reason": "$62k · overdue 7d · waiting 14d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-30_novapharma_security_questionnaire#0",
-   "account_id": "L-1029",
-   "company": "NovaPharma",
-   "owner": "Bhavin",
-   "type": "client_ask",
-   "title": "Complete security questionnaire",
-   "quote": "As Lisa flagged, attached is our vendor security questionnaire — 78 questions covering data handling, hosting, access control and incident response. We need the completed document back by 24 July to keep the procurement timeline.",
-   "doc_id": "2026-06-30_novapharma_security_questionnaire",
-   "due_date": "2026-07-24",
-   "days_overdue": 0,
-   "days_waiting": 9,
-   "value_usd": 80000,
-   "score": 60,
-   "reason": "$80k · due 2026-07-24 · waiting 9d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4732,6 +4769,7 @@
    "score": 59,
    "reason": "$38k · overdue 21d · waiting 21d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4750,6 +4788,7 @@
    "score": 59,
    "reason": "value unknown · overdue 17d · waiting 21d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4768,6 +4807,7 @@
    "score": 59,
    "reason": "$62k · overdue 40d · waiting 52d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4786,6 +4826,7 @@
    "score": 59,
    "reason": "value unknown · due 2026-07-14 · waiting 1d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4804,6 +4845,7 @@
    "score": 58,
    "reason": "$35k · due 2026-07-17 · waiting 3d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4822,43 +4864,8 @@
    "score": 57,
    "reason": "$33k · overdue 24d · waiting 26d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
-  },
-  {
-   "signal_id": "2026-06-10_sunrise_foods_reactivation#1",
-   "account_id": "L-1026",
-   "company": "Sunrise Foods",
-   "owner": "Dhaval",
-   "type": "client_ask",
-   "title": "Request sales dashboard",
-   "quote": "Also our CFO keeps asking if the portal data can feed into some kind of sales dashboard.",
-   "doc_id": "2026-06-10_sunrise_foods_reactivation",
-   "due_date": "2026-06-16",
-   "days_overdue": 24,
-   "days_waiting": 26,
-   "value_usd": 33000,
-   "score": 57,
-   "reason": "$33k · overdue 24d · waiting 26d",
-   "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-10_sunrise_foods_reactivation#2",
-   "account_id": "L-1026",
-   "company": "Sunrise Foods",
-   "owner": "Dhaval",
-   "type": "atliq_promise",
-   "title": "Schedule call",
-   "quote": "let me set up a call when I'm back.",
-   "doc_id": "2026-06-10_sunrise_foods_reactivation",
-   "due_date": "2026-06-16",
-   "days_overdue": 24,
-   "days_waiting": 26,
-   "value_usd": 33000,
-   "score": 57,
-   "reason": "$33k · overdue 24d · waiting 26d",
-   "needs_review": false,
-   "primary": false
   },
   {
    "signal_id": "2026-06-18_acme_retail_monthly_reports#0",
@@ -4876,6 +4883,7 @@
    "score": 57,
    "reason": "$38k · overdue 17d · waiting 21d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4894,6 +4902,7 @@
    "score": 57,
    "reason": "$38k · overdue 17d · waiting 21d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4912,6 +4921,7 @@
    "score": 57,
    "reason": "value unknown · due 2026-07-20 · waiting 4d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4930,6 +4940,7 @@
    "score": 57,
    "reason": "value unknown · overdue 14d · waiting 16d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4948,6 +4959,7 @@
    "score": 56,
    "reason": "$28k · overdue 7d · waiting 9d · competitor in play",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -4966,6 +4978,7 @@
    "score": 55,
    "reason": "value unknown · overdue 10d · waiting 13d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -4984,6 +4997,7 @@
    "score": 55,
    "reason": "value unknown · overdue 9d · waiting 11d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -5002,6 +5016,7 @@
    "score": 55,
    "reason": "$48k · overdue 3d · waiting 37d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5020,24 +5035,7 @@
    "score": 55,
    "reason": "$38k · overdue 13d · waiting 16d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-24_acme_quarterly_review#1",
-   "account_id": "L-1001",
-   "company": "Acme Retail Group",
-   "owner": "Dhaval",
-   "type": "atliq_promise",
-   "title": "Send scope note",
-   "quote": "Ayush to send scope note.",
-   "doc_id": "2026-06-24_acme_quarterly_review",
-   "due_date": "2026-06-27",
-   "days_overdue": 13,
-   "days_waiting": 16,
-   "value_usd": 38000,
-   "score": 55,
-   "reason": "$38k · overdue 13d · waiting 16d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5056,6 +5054,7 @@
    "score": 55,
    "reason": "$38k · overdue 14d · waiting 16d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5074,24 +5073,7 @@
    "score": 55,
    "reason": "$38k · overdue 14d · waiting 16d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-24_acme_quarterly_review#6",
-   "account_id": "L-1001",
-   "company": "Acme Retail Group",
-   "owner": "Dhaval",
-   "type": "meeting_action",
-   "title": "Intro to COO",
-   "quote": "Intro convo re: forecasting with Acme COO — ?",
-   "doc_id": "2026-06-24_acme_quarterly_review",
-   "due_date": "2026-06-26",
-   "days_overdue": 14,
-   "days_waiting": 16,
-   "value_usd": 38000,
-   "score": 55,
-   "reason": "$38k · overdue 14d · waiting 16d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5110,6 +5092,7 @@
    "score": 55,
    "reason": "value unknown · overdue 10d · waiting 14d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -5128,6 +5111,7 @@
    "score": 55,
    "reason": "$15k · due 2026-07-15 · waiting 2d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5146,24 +5130,7 @@
    "score": 54,
    "reason": "$48k · overdue 35d · waiting 37d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-04-20_healthfirst_board_update#2",
-   "account_id": "L-1009",
-   "company": "HealthFirst Clinics",
-   "owner": "Karandeep",
-   "type": "client_deadline",
-   "title": "Board meeting 14 July",
-   "quote": "now scheduled for 14 July.",
-   "doc_id": "2026-04-20_healthfirst_board_update",
-   "due_date": "2026-07-14",
-   "days_overdue": 0,
-   "days_waiting": 79,
-   "value_usd": 30000,
-   "score": 53,
-   "reason": "$30k · due 2026-07-14 · waiting 79d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5182,6 +5149,7 @@
    "score": 53,
    "reason": "value unknown · overdue 22d · waiting 24d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5200,6 +5168,7 @@
    "score": 53,
    "reason": "value unknown · overdue 24d · waiting 27d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -5218,6 +5187,7 @@
    "score": 53,
    "reason": "value unknown · overdue 21d · waiting 27d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5236,6 +5206,7 @@
    "score": 53,
    "reason": "value unknown · overdue 24d · waiting 26d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5254,6 +5225,7 @@
    "score": 53,
    "reason": "value unknown · overdue 24d · waiting 26d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5272,6 +5244,7 @@
    "score": 53,
    "reason": "value unknown · due 2026-07-17 · waiting 1d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5290,6 +5263,7 @@
    "score": 52,
    "reason": "$48k · overdue 1d · waiting 4d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5308,6 +5282,7 @@
    "score": 52,
    "reason": "$45k · overdue 2d · waiting 4d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5326,6 +5301,7 @@
    "score": 51,
    "reason": "$60k · overdue 10d · waiting 283d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -5344,6 +5320,7 @@
    "score": 51,
    "reason": "value unknown · overdue 18d · waiting 24d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5362,6 +5339,7 @@
    "score": 51,
    "reason": "value unknown · overdue 17d · waiting 20d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -5380,6 +5358,7 @@
    "score": 51,
    "reason": "value unknown · overdue 1d · waiting 3d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5398,25 +5377,8 @@
    "score": 51,
    "reason": "value unknown · overdue 17d · waiting 21d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
-  },
-  {
-   "signal_id": "2026-06-19_blueorchid_call#1",
-   "account_id": "L-1006",
-   "company": "BlueOrchid Hotels",
-   "owner": "Jay",
-   "type": "meeting_action",
-   "title": "Send approach note",
-   "quote": "I'd send an approach note — need her email first",
-   "doc_id": "2026-06-19_blueorchid_call",
-   "due_date": "2026-06-23",
-   "days_overdue": 17,
-   "days_waiting": 21,
-   "value_usd": null,
-   "score": 51,
-   "reason": "value unknown · overdue 17d · waiting 21d",
-   "needs_review": false,
-   "primary": false
   },
   {
    "signal_id": "2026-07-07_internal_prioritization#3",
@@ -5434,6 +5396,7 @@
    "score": 51,
    "reason": "$45k · overdue 1d · waiting 3d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5452,6 +5415,7 @@
    "score": 49,
    "reason": "$33k · overdue 4d · waiting 8d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5470,6 +5434,9 @@
    "score": 48,
    "reason": "$80k · due 2026-07-31 · waiting 15d",
    "needs_review": false,
+   "also_docs": [
+    "2026-07-02_internal_pipeline_review"
+   ],
    "primary": false
   },
   {
@@ -5488,24 +5455,7 @@
    "score": 48,
    "reason": "$35k · overdue 1d · waiting 3d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-07-02_internal_pipeline_review#0",
-   "account_id": "L-1029",
-   "company": "NovaPharma",
-   "owner": "Bhavin",
-   "type": "client_deadline",
-   "title": "Secure questionnaire by end of July",
-   "quote": "NovaPharma security questionnaire deadline is real — end of July or we slip a year. Who owns it?",
-   "doc_id": "2026-07-02_internal_pipeline_review",
-   "due_date": "2026-07-31",
-   "days_overdue": 0,
-   "days_waiting": 8,
-   "value_usd": 80000,
-   "score": 48,
-   "reason": "$80k · due 2026-07-31 · waiting 8d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5524,6 +5474,7 @@
    "score": 47,
    "reason": "value unknown · overdue 9d · waiting 11d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5542,6 +5493,7 @@
    "score": 47,
    "reason": "value unknown · overdue 10d · waiting 14d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5560,25 +5512,8 @@
    "score": 46,
    "reason": "$26k · overdue 4d · waiting 8d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
-  },
-  {
-   "signal_id": "2026-06-30_datanest_renewal#1",
-   "account_id": "L-1018",
-   "company": "DataNest",
-   "owner": "Karandeep",
-   "type": "client_ask",
-   "title": "Add third engineer",
-   "quote": "We've raised a Series A and want to add a third engineer, ideally someone strong on Kafka. Same arrangement?",
-   "doc_id": "2026-06-30_datanest_renewal",
-   "due_date": "2026-07-06",
-   "days_overdue": 4,
-   "days_waiting": 8,
-   "value_usd": 26000,
-   "score": 46,
-   "reason": "$26k · overdue 4d · waiting 8d",
-   "needs_review": false,
-   "primary": false
   },
   {
    "signal_id": "2026-06-30_finserve_intro_call#0",
@@ -5596,24 +5531,7 @@
    "score": 46,
    "reason": "value unknown · overdue 8d · waiting 10d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-30_finserve_intro_call#2",
-   "account_id": "L-1002",
-   "company": "FinServe Capital",
-   "owner": "Jay",
-   "type": "meeting_action",
-   "title": "Check CRM entry",
-   "quote": "crm entry exists? check with jay (L-1002?)",
-   "doc_id": "2026-06-30_finserve_intro_call",
-   "due_date": "2026-07-02",
-   "days_overdue": 8,
-   "days_waiting": 10,
-   "value_usd": null,
-   "score": 46,
-   "reason": "value unknown · overdue 8d · waiting 10d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5632,6 +5550,7 @@
    "score": 45,
    "reason": "value unknown · overdue 57d · waiting 59d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -5650,6 +5569,7 @@
    "score": 45,
    "reason": "value unknown · overdue 56d · waiting 59d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5668,25 +5588,8 @@
    "score": 45,
    "reason": "value unknown · overdue 31d · waiting 35d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
-  },
-  {
-   "signal_id": "2026-06-03_zenlytics_intro_call#1",
-   "account_id": "L-1008",
-   "company": "Zenlytics",
-   "owner": "Bhavin",
-   "type": "meeting_action",
-   "title": "Schedule intro call",
-   "quote": "Wednesday 3pm it is. I'll send a calendar invite shortly.",
-   "doc_id": "2026-06-03_zenlytics_intro_call",
-   "due_date": "2026-06-09",
-   "days_overdue": 31,
-   "days_waiting": 35,
-   "value_usd": null,
-   "score": 45,
-   "reason": "value unknown · overdue 31d · waiting 35d",
-   "needs_review": false,
-   "primary": false
   },
   {
    "signal_id": "2026-06-23_kaveri_vendor_failed#0",
@@ -5704,24 +5607,7 @@
    "score": 45,
    "reason": "$15k · overdue 10d · waiting 14d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-23_kaveri_vendor_failed#2",
-   "account_id": "L-1007",
-   "company": "Kaveri Textiles",
-   "owner": "Jay",
-   "type": "atliq_promise",
-   "title": "Show template",
-   "quote": "Pranav (copied) can show you our current textile dashboard template.",
-   "doc_id": "2026-06-23_kaveri_vendor_failed",
-   "due_date": "2026-06-30",
-   "days_overdue": 10,
-   "days_waiting": 14,
-   "value_usd": 15000,
-   "score": 45,
-   "reason": "$15k · overdue 10d · waiting 14d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5740,24 +5626,7 @@
    "score": 45,
    "reason": "$26k · overdue 2d · waiting 8d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-30_datanest_renewal#3",
-   "account_id": "L-1018",
-   "company": "DataNest",
-   "owner": "Karandeep",
-   "type": "meeting_action",
-   "title": "Call on 8 July",
-   "quote": "Let's do a call Wednesday 8 July to lock the renewal and discuss the Kafka profile.",
-   "doc_id": "2026-06-30_datanest_renewal",
-   "due_date": "2026-07-08",
-   "days_overdue": 2,
-   "days_waiting": 8,
-   "value_usd": 26000,
-   "score": 45,
-   "reason": "$26k · overdue 2d · waiting 8d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5776,6 +5645,7 @@
    "score": 44,
    "reason": "value unknown · overdue 3d · waiting 7d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -5794,6 +5664,7 @@
    "score": 44,
    "reason": "value unknown · overdue 3d · waiting 6d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5812,6 +5683,7 @@
    "score": 44,
    "reason": "value unknown · overdue 3d · waiting 7d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -5830,6 +5702,7 @@
    "score": 43,
    "reason": "value unknown · overdue 158d · waiting 171d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -5848,42 +5721,7 @@
    "score": 43,
    "reason": "value unknown · overdue 2d · waiting 4d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-21_cloudnine_rates_references#1",
-   "account_id": "L-1025",
-   "company": "CloudNine SaaS",
-   "owner": "Karandeep",
-   "type": "client_ask",
-   "title": "Request references",
-   "quote": "Following our call: can you send (a) your rate card for senior backend and DevOps profiles, and (b) two references we can speak to — ideally SaaS companies where your engineers embedded into an existing team?",
-   "doc_id": "2026-06-21_cloudnine_rates_references",
-   "due_date": "2026-07-08",
-   "days_overdue": 2,
-   "days_waiting": 4,
-   "value_usd": null,
-   "score": 43,
-   "reason": "value unknown · overdue 2d · waiting 4d",
-   "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-06-21_cloudnine_rates_references#3",
-   "account_id": "L-1025",
-   "company": "CloudNine SaaS",
-   "owner": "Karandeep",
-   "type": "atliq_promise",
-   "title": "Provide references",
-   "quote": "References: let me check with two clients that they're happy to take a call, will revert with names in a day or two.",
-   "doc_id": "2026-06-21_cloudnine_rates_references",
-   "due_date": "2026-07-08",
-   "days_overdue": 2,
-   "days_waiting": 4,
-   "value_usd": null,
-   "score": 43,
-   "reason": "value unknown · overdue 2d · waiting 4d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5902,6 +5740,7 @@
    "score": 43,
    "reason": "value unknown · overdue 1d · waiting 6d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5920,6 +5759,7 @@
    "score": 43,
    "reason": "value unknown · overdue 2d · waiting 4d",
    "needs_review": true,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5938,6 +5778,7 @@
    "score": 41,
    "reason": "$15k · overdue 2d · waiting 14d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5956,6 +5797,7 @@
    "score": 36,
    "reason": "$30k · overdue 77d · waiting 79d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -5974,6 +5816,7 @@
    "score": 35,
    "reason": "$71k · due 2026-08-31 · waiting 8d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -5992,6 +5835,7 @@
    "score": 34,
    "reason": "$25k · overdue 93d · waiting 96d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -6010,42 +5854,7 @@
    "score": 34,
    "reason": "$25k · overdue 94d · waiting 96d",
    "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-04-05_smartserve_intro_call#2",
-   "account_id": "L-1034",
-   "company": "SmartServe Hospitality",
-   "owner": "Jay",
-   "type": "client_ask",
-   "title": "Milestone payment structure",
-   "quote": "Wants milestone-based payments",
-   "doc_id": "2026-04-05_smartserve_intro_call",
-   "due_date": "2026-04-07",
-   "days_overdue": 94,
-   "days_waiting": 96,
-   "value_usd": 25000,
-   "score": 34,
-   "reason": "$25k · overdue 94d · waiting 96d",
-   "needs_review": false,
-   "primary": false
-  },
-  {
-   "signal_id": "2026-04-05_smartserve_intro_call#3",
-   "account_id": "L-1034",
-   "company": "SmartServe Hospitality",
-   "owner": "Jay",
-   "type": "client_ask",
-   "title": "Budget confirmation",
-   "quote": "Pooja estimated 25k budget \"if the scope is right\"",
-   "doc_id": "2026-04-05_smartserve_intro_call",
-   "due_date": "2026-04-07",
-   "days_overdue": 94,
-   "days_waiting": 96,
-   "value_usd": 25000,
-   "score": 34,
-   "reason": "$25k · overdue 94d · waiting 96d",
-   "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -6064,6 +5873,7 @@
    "score": 33,
    "reason": "value unknown · overdue 132d · waiting 171d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -6082,25 +5892,8 @@
    "score": 33,
    "reason": "value unknown · overdue 143d · waiting 146d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
-  },
-  {
-   "signal_id": "2026-02-05_steelcore_pricing_objection#1",
-   "account_id": "L-1021",
-   "company": "SteelCore Industries",
-   "owner": "Jay",
-   "type": "atliq_promise",
-   "title": "Offer to explain value",
-   "quote": "Happy to get on a call and walk through exactly what's included.",
-   "doc_id": "2026-02-05_steelcore_pricing_objection",
-   "due_date": "2026-02-17",
-   "days_overdue": 143,
-   "days_waiting": 146,
-   "value_usd": null,
-   "score": 33,
-   "reason": "value unknown · overdue 143d · waiting 146d",
-   "needs_review": false,
-   "primary": false
   },
   {
    "signal_id": "2026-05-04_urbannest_no_response#0",
@@ -6118,6 +5911,7 @@
    "score": 33,
    "reason": "value unknown · overdue 65d · waiting 67d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -6136,6 +5930,7 @@
    "score": 33,
    "reason": "$38k · due 2026-09-30 · waiting 16d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -6154,6 +5949,7 @@
    "score": 33,
    "reason": "value unknown · overdue 98d · waiting 112d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   },
   {
@@ -6172,6 +5968,7 @@
    "score": 29,
    "reason": "$26k · due 2026-09-30 · waiting 8d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -6190,6 +5987,7 @@
    "score": 27,
    "reason": "value unknown · due 2026-07-31 · waiting 24d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -6208,6 +6006,7 @@
    "score": 27,
    "reason": "value unknown · due 2026-08-31 · waiting 2d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -6226,6 +6025,7 @@
    "score": 27,
    "reason": "value unknown · due 2026-09-30 · waiting 1d",
    "needs_review": false,
+   "also_docs": [],
    "primary": false
   },
   {
@@ -6244,6 +6044,7 @@
    "score": 16,
    "reason": "$40k · due 2026-09-30 · waiting 31d",
    "needs_review": false,
+   "also_docs": [],
    "primary": true
   }
  ],
@@ -8497,7 +8298,7 @@
   "won": 135000,
   "lost": 82000,
   "waiting_on_atliq": 674000,
-  "overdue_actions": 83,
+  "overdue_actions": 65,
   "not_in_crm": 5,
   "open_deals": 40
  }

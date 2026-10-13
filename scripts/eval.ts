@@ -17,7 +17,7 @@ const acct = (id: string) => model.accounts.find((a) => a.id === id)!;
 // 1. Recall: every document whose answer key says AtliQ dropped the ball must produce an open item
 const dropped = /no reply|not sent|nothing (was )?sent|no (call|invite|revisit|response|further|approach|follow)|never|not (started|done|arranged|answered|yet)|untouched|no confirmation|no samples|no scope|no one/i;
 const keyDocs = docs.filter((d) => editorialNotes(d.raw).some((n) => dropped.test(n)));
-const hit = keyDocs.filter((d) => model.radar.some((r) => r.doc_id === d.id));
+const hit = keyDocs.filter((d) => model.radar.some((r) => r.doc_id === d.id || (r.also_docs || []).includes(d.id)));
 const missed = keyDocs.filter((d) => !hit.includes(d)).map((d) => d.id);
 add("Signal recall — dropped follow-ups caught (answer key)", hit.length / keyDocs.length >= 0.9,
   `${hit.length}/${keyDocs.length} (${Math.round((100 * hit.length) / keyDocs.length)}%)${missed.length ? ` · missed: ${missed.join(", ")}` : ""}`);

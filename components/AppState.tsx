@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-// Prototype state lives in the browser (localStorage): who you're viewing as,
+// Prototype state lives in the browser (localStorage): who is using the app,
 // done/snoozed reminders, and approve/reject decisions with an audit log.
 
 export interface Decision {
@@ -14,8 +14,9 @@ export interface Decision {
 }
 
 interface State {
-  owner: string;
-  setOwner: (o: string) => void;
+  ready: boolean;
+  owner: string | null; // null = not chosen yet; "All" = whole team
+  setOwner: (o: string | null) => void;
   done: Record<string, string>;
   snoozed: Record<string, string>;
   markDone: (id: string) => void;
@@ -27,14 +28,14 @@ interface State {
 }
 
 const Ctx = createContext<State | null>(null);
-const KEY = "atliq-assistant-state-v1";
+const KEY = "atliq-assistant-state-v2";
 
 export function AppStateProvider({ children }: { children: React.ReactNode }) {
-  const [owner, setOwner] = useState("All");
+  const [ready, setReady] = useState(false);
+  const [owner, setOwner] = useState<string | null>(null);
   const [done, setDone] = useState<Record<string, string>>({});
   const [snoozed, setSnoozed] = useState<Record<string, string>>({});
   const [decisions, setDecisions] = useState<Record<string, Decision>>({});
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     try {
@@ -44,22 +45,24 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
       setSnoozed(s.snoozed || {});
       setDecisions(s.decisions || {});
     } catch {}
-    setLoaded(true);
+    setReady(true);
   }, []);
 
   useEffect(() => {
-    if (!loaded) return;
+    if (!ready) return;
     try {
       localStorage.setItem(KEY, JSON.stringify({ owner, done, snoozed, decisions }));
     } catch {}
-  }, [owner, done, snoozed, decisions, loaded]);
+  }, [owner, done, snoozed, decisions, ready]);
 
   const now = () => new Date().toISOString();
-  const by = owner === "All" ? "Founder" : owner;
+  const by = !owner || owner === "All" ? "Founder" : owner;
+  const drop = (id: string) => (m: Record<string, string>) => Object.fromEntries(Object.entries(m).filter(([k]) => k !== id));
 
   return (
     <Ctx.Provider
       value={{
+        ready,
         owner,
         setOwner,
         done,
@@ -67,13 +70,11 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
         markDone: (id) => setDone((d) => ({ ...d, [id]: now() })),
         snooze: (id) => setSnoozed((d) => ({ ...d, [id]: now() })),
         undo: (id) => {
-          const drop = (m: Record<string, string>) => Object.fromEntries(Object.entries(m).filter(([k]) => k !== id));
-          setDone(drop);
-          setSnoozed(drop);
+          setDone(drop(id));
+          setSnoozed(drop(id));
         },
         decisions,
-        decide: (id, decision, value) =>
-          setDecisions((d) => ({ ...d, [id]: { id, decision, value, at: now(), by } })),
+        decide: (id, decision, value) => setDecisions((d) => ({ ...d, [id]: { id, decision, value, at: now(), by } })),
         resetAll: () => {
           setDone({});
           setSnoozed({});
@@ -90,4 +91,9 @@ export function useAppState() {
   const c = useContext(Ctx);
   if (!c) throw new Error("useAppState outside provider");
   return c;
+}
+
+/** Does an item owned by `itemOwner` belong in the current view? */
+export function inView(owner: string | null, itemOwner: string) {
+  return !owner || owner === "All" || itemOwner === owner;
 }

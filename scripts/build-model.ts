@@ -15,7 +15,7 @@ import path from "node:path";
 import { loadCrm, loadDocs } from "../lib/dataset";
 import { REFERENCE_DATE, addBusinessDays, daysBetween, iso, resolveDue, toDate } from "../lib/dates";
 import { EXTRACT_MODEL, REASON_MODEL, chatJSON, hasKey } from "../lib/llm";
-import { EXTRACT_SYSTEM, SYNTH_SYSTEM } from "../lib/prompts";
+import { EXTRACT_SYSTEM, PROFILE_SYSTEM, SYNTH_SYSTEM } from "../lib/prompts";
 import type {
   Account, CrmRecord, CrmSuggestion, Model, RadarItem, Signal, SignalType, Stage,
 } from "../lib/types";
@@ -240,6 +240,9 @@ async function main() {
       summary: "",
       highlights: [],
       next_best_action: "",
+      about: "",
+      why_here: "",
+      wants: "",
       doc_ids: docIds,
       last_touch: lastTouch,
       days_since_touch: lastTouch ? daysBetween(lastTouch, REFERENCE_DATE) : null,
@@ -299,6 +302,29 @@ async function main() {
     a.highlights = (syn.highlights || []).slice(0, 4);
     a.next_best_action = syn.next_best_action || "";
     (a as Account & { _updates?: Synthesis["crm_updates"] })._updates = syn.crm_updates || [];
+  }
+
+  // ---------- 5b. lead profile: who they are, why they're here, what they want
+  for (const a of accounts) {
+    a.about = a.why_here = a.wants = "";
+    if (!ai) continue;
+    const p = await cached<{ about?: string; why_here?: string; wants?: string }>(`profile_${slug(a.id)}`, async () => {
+      process.stdout.write(`  profiling ${a.company}\n`);
+      return chatJSON({
+        model: EXTRACT_MODEL,
+        system: PROFILE_SYSTEM,
+        user: JSON.stringify({
+          company: a.company,
+          crm_record: a.crm ?? "NOT IN CRM",
+          conversations: a.doc_ids.map((id) => ({ id, summary: extractions[id]?.summary, highlights: extractions[id]?.highlights })),
+          signals: signals.filter((s) => s.account_id === a.id).map((s) => `${s.type}: ${s.quote}`),
+        }),
+        maxTokens: 1500,
+      });
+    });
+    a.about = p.about || "";
+    a.why_here = p.why_here || "";
+    a.wants = p.wants || "";
   }
 
   // ---------- 6. CRM suggestions (AI-proposed + code-derived), all need human approval
@@ -391,6 +417,21 @@ async function main() {
       days_overdue: overdue, days_waiting: waiting, value_usd: value, score, reason: parts.join(" · "),
       needs_review: s.needs_review,
     });
+  }
+  // Merge near-duplicates: the same account + same due date found in several documents is one task.
+  // Keep the most actionable wording (an ask or promise over a bare deadline) and the highest score.
+  const groups = new Map<string, RadarItem[]>();
+  for (const r of radar) {
+    const k = r.due_date && ["client_ask", "atliq_promise", "client_deadline", "meeting_action"].includes(r.type) ? `${r.account_id}|${r.due_date}` : r.signal_id;
+    groups.set(k, [...(groups.get(k) || []), r]);
+  }
+  radar.length = 0;
+  for (const g of groups.values()) {
+    const pick = g.find((r) => r.type === "client_ask" || r.type === "atliq_promise") || g.find((r) => r.type === "meeting_action") || g[0];
+    const rep: RadarItem = { ...pick, score: Math.max(...g.map((r) => r.score)) };
+    rep.also_docs = [...new Set(g.map((r) => r.doc_id).filter((d) => d !== rep.doc_id))];
+    if (g.some((r) => r.type === "client_deadline") && rep.type !== "client_deadline") rep.reason += " · client deadline";
+    radar.push(rep);
   }
   radar.sort((x, y) => y.score - x.score);
   // The top item per account leads the list; the rest sit behind "+N more" so one account can't flood it.

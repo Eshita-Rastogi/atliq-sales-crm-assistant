@@ -107,6 +107,9 @@ export interface Account {
   summary: string;
   highlights: string[];
   next_best_action: string;
+  about: string; // who they are
+  why_here: string; // how they came to AtliQ
+  wants: string; // what they want from AtliQ
   doc_ids: string[];
   last_touch: string | null;
   days_since_touch: number | null;
@@ -132,6 +135,7 @@ export interface RadarItem {
   reason: string;
   needs_review: boolean;
   primary?: boolean; // highest-ranked item for its account
+  also_docs?: string[]; // other documents that raised the same task (merged)
 }
 
 export interface Model {

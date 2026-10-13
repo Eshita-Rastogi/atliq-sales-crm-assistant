@@ -46,6 +46,13 @@ Proposal Sent = proposal, quote or SOW sent and awaiting decision. Negotiation =
 Won = signed, or an existing client (keep Won when an existing client asks for more). Lost = closed with no new activity. Re-engaged = was Lost but the client came back.
 Only propose a CRM update when a signal's quote supports it; never invent values. Use only the evidence given.`;
 
+export const PROFILE_SYSTEM = `You write a short lead profile for AtliQ sellers, using ONLY the facts given (CRM record and conversation summaries).
+Return JSON only: {"about": string, "why_here": string, "wants": string}
+about: one sentence on who the company is (industry, size or operations if stated).
+why_here: one sentence on how they came to AtliQ (referral from whom, conference, website enquiry, LinkedIn, cold outreach, existing client).
+wants: one sentence on what they want from AtliQ (the need or project, budget if stated).
+If a fact is not given, say so briefly (e.g. "Not stated in the CRM or conversations."). Never invent. Plain text, no markdown.`;
+
 export const ASK_SYSTEM = `You are AtliQ's Sales & CRM Assistant. Answer the user's question using ONLY the sources provided (CRM rows, emails and meeting notes). Today is 2026-07-10.
 Rules:
 - Be concise: 2-6 sentences or a short bullet list. Plain text, no markdown bold.
