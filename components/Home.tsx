@@ -76,7 +76,7 @@ export function Home({ radar, accounts: baseAccounts, refDate, nextSteps }: { ra
         </p>
       </div>
       <div className="flex gap-2">
-        <Link href="/meetings/new" className="btn px-3 py-1.5 text-sm">📝 Log meeting</Link>
+        <Link href="/meetings/new" className="btn px-3 py-1.5 text-sm">🎙 Record / log meeting</Link>
         <Link href="/leads/new" className="btn-primary px-3 py-1.5 text-sm">+ New lead</Link>
       </div>
       </div>

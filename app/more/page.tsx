@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const LINKS = [
-  { href: "/meetings/new", label: "📝 Log meeting notes", sub: "Type or dictate right after a call — AI writes the MOM" },
+  { href: "/meetings/new", label: "🎙 Record / log a meeting", sub: "Record, dictate or type right after a call — AI writes the MOM and follow-ups" },
   { href: "/leads/new", label: "+ New lead", sub: "Type it in or paste an email / card" },
   { href: "/settings/connections", label: "🔗 Connect sources", sub: "Link email, calendar, WhatsApp, forward-to address" },
   { href: "/settings/reminders", label: "⏰ Reminder settings", sub: "Digest time, reminders, escalation" },

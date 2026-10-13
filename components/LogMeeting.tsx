@@ -51,6 +51,15 @@ export function LogMeeting({ leads }: { leads: { id: string; company: string; ow
   const [listening, setListening] = useState(false);
   const [canDictate, setCanDictate] = useState(false);
   const rec = useRef<Speech | null>(null);
+  // Meeting recorder (phone / laptop mic) -> Whisper transcription
+  const [recording, setRecording] = useState(false);
+  const [secs, setSecs] = useState(0);
+  const [consent, setConsent] = useState(false);
+  const [transcribing, setTranscribing] = useState(false);
+  const [source, setSource] = useState("");
+  const media = useRef<MediaRecorder | null>(null);
+  const chunks = useRef<Blob[]>([]);
+  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const L = leads.find((l) => l.id === lead);
 
   useEffect(() => {
@@ -79,6 +88,73 @@ export function LogMeeting({ leads }: { leads: { id: string; company: string; ow
     rec.current = r;
     r.start();
     setListening(true);
+  }
+
+  async function transcribe(blob: Blob, name: string, label: string) {
+    setErr("");
+    setTranscribing(true);
+    try {
+      const fd = new FormData();
+      fd.append("audio", blob, name);
+      const r = await fetch("/api/transcribe", { method: "POST", body: fd });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.error || "Transcription failed");
+      setNotes((n) => (n ? n.trimEnd() + "\n\n" : "") + j.text);
+      setSource(`${label} · transcribed by ${j.model}`);
+      return j.text as string;
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : "Transcription failed");
+      return "";
+    } finally {
+      setTranscribing(false);
+    }
+  }
+
+  async function startRecording() {
+    if (!consent) return setErr("Please confirm everyone in the meeting knows it is being recorded.");
+    setErr("");
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const type = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"].find((t) => MediaRecorder.isTypeSupported(t)) || "";
+      const mr = new MediaRecorder(stream, type ? { mimeType: type, audioBitsPerSecond: 32000 } : undefined);
+      chunks.current = [];
+      mr.ondataavailable = (e) => e.data.size && chunks.current.push(e.data);
+      mr.onstop = async () => {
+        stream.getTracks().forEach((t) => t.stop());
+        const blob = new Blob(chunks.current, { type: mr.mimeType || "audio/webm" });
+        const ext = (mr.mimeType || "").includes("mp4") ? "m4a" : "webm";
+        await transcribe(blob, `meeting.${ext}`, "Recorded in the app");
+      };
+      media.current = mr;
+      mr.start(1000);
+      setSecs(0);
+      timer.current = setInterval(() => setSecs((s) => s + 1), 1000);
+      setRecording(true);
+    } catch {
+      setErr("Microphone access was blocked — allow the mic for this site in your browser settings.");
+    }
+  }
+
+  function stopRecording() {
+    media.current?.stop();
+    if (timer.current) clearInterval(timer.current);
+    setRecording(false);
+  }
+
+  async function runDemo() {
+    setLead((l) => l || "L-1030");
+    setDate("2026-07-09");
+    setNotes("");
+    setRes(null);
+    const audio = new Audio("/demo/meeting-demo.wav");
+    audio.play().catch(() => {});
+    const blob = await (await fetch("/demo/meeting-demo.wav")).blob();
+    await transcribe(blob, "meeting-demo.wav", "Demo recording (GreenGrid debrief)");
+  }
+
+  async function onFile(f: File | undefined) {
+    if (!f) return;
+    await transcribe(f, f.name, `Uploaded file: ${f.name}`);
   }
 
   async function process() {
@@ -138,6 +214,37 @@ export function LogMeeting({ leads }: { leads: { id: string; company: string; ow
         <p className="text-sm text-slate-500">Capture it right after the call — type, paste or dictate. The AI writes the minutes and creates the follow-ups so nothing is lost.</p>
       </div>
 
+      <section className="card border-indigo-200 bg-indigo-50/40 p-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="font-semibold text-indigo-900">🎙 Record the meeting</h2>
+          <button className="btn" onClick={runDemo} disabled={transcribing || recording}>▶ Try the demo recording</button>
+        </div>
+        <ol className="mt-2 list-decimal space-y-0.5 pl-5 text-xs text-slate-700">
+          <li>Pick the lead below and tell everyone the meeting is being recorded.</li>
+          <li>Tap <b>Start recording</b> and put the phone on the table (or record your 1-minute debrief right after the call).</li>
+          <li>Tap <b>Stop</b> — the audio is transcribed, then <b>✦ Create minutes &amp; follow-ups</b> writes the MOM and actions.</li>
+        </ol>
+        <label className="mt-3 flex items-center gap-2 text-xs text-slate-700">
+          <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} /> Everyone in the meeting knows it is being recorded
+        </label>
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          {recording ? (
+            <button className="btn border-rose-300 bg-rose-50 text-rose-700" onClick={stopRecording}>■ Stop · {Math.floor(secs / 60)}:{String(secs % 60).padStart(2, "0")}</button>
+          ) : (
+            <button className="btn-primary px-3 py-1.5 text-sm" onClick={startRecording} disabled={transcribing}>● Start recording</button>
+          )}
+          <label className="btn cursor-pointer">
+            ⬆ Upload audio (voice memo)
+            <input type="file" accept="audio/*" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
+          </label>
+          {recording && <span className="text-xs text-rose-600">● Recording… keep this screen open</span>}
+          {transcribing && <span className="animate-pulse text-xs text-indigo-700">Transcribing…</span>}
+        </div>
+        <p className="mt-2 text-[11px] text-slate-500">
+          Prototype limit: about 10–15 minutes per recording. Online meetings (Zoom / Meet / Teams): in production you invite the AtliQ note-taker to the calendar event and it joins, records and files the MOM automatically.
+        </p>
+      </section>
+
       <section className="card space-y-3 p-4">
         <div className="grid gap-3 sm:grid-cols-[2fr_1fr]">
           <label className="text-xs text-slate-600">
@@ -176,6 +283,7 @@ export function LogMeeting({ leads }: { leads: { id: string; company: string; ow
           <button className="btn-primary ml-auto px-3 py-1.5 text-sm" onClick={process} disabled={busy}>{busy ? "Writing minutes…" : "✦ Create minutes & follow-ups"}</button>
         </div>
         {listening && <p className="text-xs text-rose-600">● Listening… speak naturally, then press Stop.</p>}
+        {source && <p className="text-xs text-emerald-700">✓ Notes filled from: {source}. Review, then create the minutes.</p>}
         {err && <p className="text-[13px] text-rose-600">{err}</p>}
       </section>
 

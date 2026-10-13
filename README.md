@@ -20,12 +20,19 @@ Start by picking who you are (Bhavin, Dhaval, Karandeep, Jay or *Whole team*); e
 | **Ask AI** | Ask anything about the pipeline; answers cite the source document and say "Not found in the data" when unsupported. |
 | Review CRM updates | Top-bar badge: all AI-suggested CRM changes for your leads, with an audit log. |
 | **Working a lead** | Tick a follow-up done → record **what you did and when** (replied, call held, SOW sent, contract sent, signed…) → the lead **moves to the suggested stage**, last contact updates and the activity log records it. Move stages by hand on the lead's stage track. **Snooze** (hide until a date) and **Remind me** (ping on a date). **Lead profile % complete** with nudges, an edit form and AI-suggested values from the emails. |
-| **📝 Log meeting notes** | Right after a call: type, paste or **dictate** (browser speech-to-text). The AI writes the MOM (summary, budget, decision-maker, highlights) and creates follow-ups with owners and due dates (quotes verified, dates in code). Appears instantly on the lead's timeline, in Follow-ups and reminders; can set the deal value from the notes. |
+| **📝 Log meeting notes** | **🎙 Record the meeting** on your phone or laptop (or upload a voice memo) → transcribed with **Whisper** (Groq) → or type, paste or **dictate** (browser speech-to-text). The AI writes the MOM (summary, budget, decision-maker, highlights) and creates follow-ups with owners and due dates (quotes verified, dates in code). Appears instantly on the lead's timeline, in Follow-ups and reminders; can set the deal value from the notes. |
 | **On the phone** | Bottom tab bar; Home shows what needs you first (attention, top 5) before the sales overview. |
 | **+ New lead** | Add a lead by hand or **paste an email / note / business-card text** — the AI fills the form and finds follow-ups (verbatim quotes, dates in code). A **duplicate check** (contact email, email domain, company name) runs before saving. |
 | **Merge duplicates** | Side-by-side review of possible duplicates (e.g. Meridian L-1003 / L-1027): choose the value per field, then **Merge** or **Keep both** (e.g. GlobalMart's two service lines). Never automatic; logged. |
 | **Connect sources** | Per person: how to link Gmail / Outlook, calendar, meeting notes & transcripts, WhatsApp (Business API or forwarding), LinkedIn, a personal forward-to address and paste capture — what each reads / never touches, step-by-step setup and the permission screen. Connect is a clearly labelled simulation in the prototype. |
 | **Data sources** | What the assistant reads today (dataset snapshot), how a document becomes a follow-up, and the integration roadmap (Gmail/Outlook, calendar, forward-to address, WhatsApp Business, CRM write-back). |
+
+## Recording a meeting (demo)
+
+1. Open **🎙 Record / log meeting** (Home, any lead page, or More on a phone).
+2. Press **▶ Try the demo recording** — a 40-second GreenGrid debrief is played and transcribed.
+3. Press **✦ Create minutes & follow-ups** → review the MOM, budget and follow-ups → **Save to GreenGrid Solar**.
+4. For a real meeting: pick the lead, tick the consent box, **● Start recording**, then **■ Stop**. (Prototype limit ~10–15 min; online meetings use an invited note-taker in production.)
 
 ## How it works
 

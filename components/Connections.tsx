@@ -15,9 +15,45 @@ interface Source {
   permissions: string[];
   note?: string;
   live?: boolean; // works in the prototype today
+  href?: string; // where to try it
+  cta?: string;
 }
 
 const SOURCES: Source[] = [
+  {
+    key: "recorder",
+    name: "Meeting recorder (phone or laptop mic)",
+    icon: "🎙",
+    tag: "In-person meetings & debriefs",
+    reads: ["Audio you record in the app, or a voice memo you upload", "Transcribed with Whisper, then turned into a MOM + follow-ups"],
+    never: ["Records without you pressing Start", "Keeps the audio — only the transcript and MOM are saved"],
+    steps: [
+      "Open 📝 Log meeting (Home, a lead page, or More on your phone) and pick the lead.",
+      "Tell everyone the meeting is recorded, tick the consent box, tap ● Start recording.",
+      "Tap ■ Stop → the audio is transcribed → ✦ Create minutes & follow-ups → Save to the lead.",
+      "Try it now with ▶ Try the demo recording (a GreenGrid debrief).",
+    ],
+    permissions: ["Microphone — asked by your browser when you tap Start"],
+    note: "Prototype limit ~10–15 minutes per recording. Online meetings: the production note-taker joins Zoom / Meet / Teams when you invite it to the calendar event.",
+    live: true,
+    href: "/meetings/new",
+    cta: "Open meeting recorder",
+  },
+  {
+    key: "notetaker",
+    name: "AI note-taker for Zoom / Meet / Teams",
+    icon: "🤖",
+    tag: "Online meetings",
+    reads: ["Audio and transcript of meetings it is invited to", "Meeting title, time and attendees"],
+    never: ["Joins meetings it isn't invited to", "Records internal meetings unless invited"],
+    steps: [
+      "Add notetaker@atliq.com to the client meeting invite (or turn on 'auto-join client meetings').",
+      "The bot joins as 'AtliQ Notetaker' and announces it is recording.",
+      "After the call, the MOM and follow-ups appear on the lead and you get a notification to review them.",
+    ],
+    permissions: ["Calendar access to see invites it's added to", "Meeting platform permission to join and record"],
+    note: "Planned for production — uses a meeting-bot service plus the calendar connection.",
+  },
   {
     key: "gmail",
     name: "Gmail / Google Workspace",
@@ -223,7 +259,7 @@ export function Connections() {
 
               <div className="mt-auto flex justify-end gap-2 pt-3">
                 {s.live ? (
-                  <Link href="/leads/new" className="btn-primary">Open + New lead</Link>
+                  <Link href={s.href || "/leads/new"} className="btn-primary">{s.cta || "Open + New lead"}</Link>
                 ) : s.key === "forward" ? (
                   <span className="text-xs text-slate-500">Use the address above</span>
                 ) : st ? (
