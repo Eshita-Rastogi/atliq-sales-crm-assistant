@@ -5,6 +5,7 @@ import { DocCard } from "@/components/DocCard";
 import { FollowUpRow } from "@/components/FollowUpRow";
 import { LeadStatusPanel } from "@/components/LeadStatusPanel";
 import { LeadTabs } from "@/components/LeadTabs";
+import { LiveFollowUps, LiveMeetings } from "@/components/LiveLeadExtras";
 import { MergeBanner } from "@/components/MergeBanner";
 import { SuggestionRow } from "@/components/SuggestionRow";
 import { accountById, model } from "@/lib/model";
@@ -49,6 +50,7 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
             {a.lead_ids.length > 0 ? <> · {a.lead_ids.join(", ")}</> : <span className="ml-1 font-medium text-amber-700">· Not in CRM yet</span>}
           </div>
         </div>
+        <Link href={`/meetings/new?lead=${encodeURIComponent(a.id)}`} className="btn-primary px-3 py-1.5 text-sm">📝 Log meeting notes</Link>
       </div>
 
       {/* 1. About this lead */}
@@ -92,6 +94,7 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
         {a.duplicate_of.length > 0 && <MergeBanner id={a.id} others={a.duplicate_of} note={a.duplicate_note} />}
         <h3 className="mb-1 mt-5 text-sm font-semibold text-slate-700">Follow-ups ({followUps.length})</h3>
         <div className="divide-y divide-slate-100 rounded-lg border border-slate-200">
+          <LiveFollowUps accountId={a.id} stage={a.ai_stage} />
           {followUps.map((r) => <FollowUpRow key={r.signal_id} r={r} showCompany={false} stage={a.ai_stage} />)}
           {followUps.length === 0 && <div className="px-4 py-3 text-sm text-slate-500">Nothing open — no follow-ups found for this lead.</div>}
         </div>
@@ -105,6 +108,7 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
             label: `Activity (${docs.length})`,
             content: (
               <div className="space-y-3 border-l border-slate-200 pl-1">
+                <LiveMeetings accountId={a.id} />
                 {docs.map((d) => (
                   <DocCard key={d.id} id={d.id} kind={d.kind} title={d.title} date={d.date} summary={d.summary || ""} highlights={d.highlights || []} text={d.text} quotes={sigs.filter((s) => s.doc_id === d.id).map((s) => s.quote)} />
                 ))}

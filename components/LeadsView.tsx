@@ -28,11 +28,13 @@ const FILTERS = [
   { key: "incomplete", label: "Incomplete profiles", test: (r: LeadRow) => (r.profile ?? 100) < 70 },
 ];
 
-export function LeadsView({ rows: baseRows, items }: { rows: LeadRow[]; items: LiveItem[] }) {
+export function LeadsView({ rows: baseRows, items: baseItems }: { rows: LeadRow[]; items: LiveItem[] }) {
+  let items = baseItems;
   let rows = baseRows;
   const params = useSearchParams();
   const router = useRouter();
   const { owner, customLeads, customItems, merges, done, snoozed, leadEdits } = useAppState();
+  items = [...items, ...customItems];
   const dropped = new Set(merges.map((m) => m.drop));
   const added: LeadRow[] = customLeads.map((c) => {
     const items = customItems.filter((i) => i.account_id === c.id && i.due_date).sort((a, b) => a.due_date!.localeCompare(b.due_date!));

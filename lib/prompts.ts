@@ -65,6 +65,17 @@ Return JSON only:
  "follow_ups": [{"title": short action for AtliQ, "quote": sentence copied EXACTLY from the text, "due_phrase": time words exactly as written or ""}]}
 Use "" or null when something isn't in the text. Never invent names, emails, amounts or dates.`;
 
+export const MOM_SYSTEM = `You turn a seller's raw meeting notes (typed or dictated, often messy) into clean minutes of meeting for AtliQ's CRM.
+AtliQ people: Bhavin, Dhaval, Karandeep, Jay, Pranav, Ayush. Everyone else is the client.
+Return JSON only:
+{"title": short meeting title,
+ "summary": 2 sentences on what was discussed and where the deal stands,
+ "highlights": up to 4 short facts (budget, decision-maker, timeline, scope, competitor),
+ "budget_usd": number or null (only if stated),
+ "decision_maker": string or "",
+ "actions": [{"title": short action for AtliQ, "owner": AtliQ first name or "", "quote": the words copied EXACTLY from the notes, "due_phrase": time words exactly as written or ""}]}
+Never invent facts, amounts, names or dates. If something isn't in the notes, leave it empty.`;
+
 export const ASK_SYSTEM = `You are AtliQ's Sales & CRM Assistant. Answer the user's question using ONLY the sources provided (CRM rows, emails and meeting notes). Today is 2026-07-10.
 Rules:
 - Be concise: 2-6 sentences or a short bullet list. Plain text, no markdown bold.

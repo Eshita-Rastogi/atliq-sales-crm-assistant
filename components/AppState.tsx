@@ -70,8 +70,23 @@ export interface LeadEdit {
   last_contact?: string;
 }
 
+export interface LoggedMeeting {
+  id: string;
+  account_id: string;
+  company: string;
+  date: string;
+  title: string;
+  summary: string;
+  highlights: string[];
+  notes: string; // raw notes as typed / dictated
+  by: string;
+  at: string;
+}
+
 interface State {
   ready: boolean;
+  meetings: LoggedMeeting[];
+  addMeeting: (m: Omit<LoggedMeeting, "by" | "at">, items: RadarItem[], fields?: Record<string, string>) => void;
   outcomes: Record<string, Outcome>;
   completeFollowUp: (item: { signal_id: string; account_id: string; title: string }, o: Outcome) => void;
   remindAt: Record<string, string>;
@@ -117,6 +132,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   const [remindAt, setRemindAt] = useState<Record<string, string>>({});
   const [leadEdits, setLeadEdits] = useState<Record<string, LeadEdit>>({});
   const [activity, setActivity] = useState<Record<string, Activity[]>>({});
+  const [meetings, setMeetings] = useState<LoggedMeeting[]>([]);
 
   useEffect(() => {
     try {
@@ -133,6 +149,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
       setRemindAt(s.remindAt || {});
       setLeadEdits(s.leadEdits || {});
       setActivity(s.activity || {});
+      setMeetings(s.meetings || []);
     } catch {}
     setReady(true);
   }, []);
@@ -140,9 +157,9 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!ready) return;
     try {
-      localStorage.setItem(KEY, JSON.stringify({ owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, outcomes, remindAt, leadEdits, activity }));
+      localStorage.setItem(KEY, JSON.stringify({ owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, outcomes, remindAt, leadEdits, activity, meetings }));
     } catch {}
-  }, [owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, outcomes, remindAt, leadEdits, activity, ready]);
+  }, [owner, done, snoozed, decisions, customLeads, customItems, merges, reminders, outcomes, remindAt, leadEdits, activity, meetings, ready]);
 
   const now = () => new Date().toISOString();
   const by = !owner || owner === "All" ? "Founder" : owner;
@@ -161,6 +178,13 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
     <Ctx.Provider
       value={{
         ready,
+        meetings,
+        addMeeting: (m, items, fields) => {
+          setMeetings((x) => [{ ...m, by, at: now() }, ...x]);
+          setCustomItems((x) => [...x, ...items]);
+          patchLead(m.account_id, { last_contact: m.date, ...(fields && Object.keys(fields).length ? { fields } : {}) });
+          addActivity(m.account_id, m.date, `📝 Meeting notes logged: ${m.title}${items.length ? ` · ${items.length} follow-up${items.length > 1 ? "s" : ""} created` : ""}`);
+        },
         outcomes,
         completeFollowUp: (item, o) => {
           setDone((d) => ({ ...d, [item.signal_id]: now() }));
@@ -227,6 +251,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
           setRemindAt({});
           setLeadEdits({});
           setActivity({});
+          setMeetings([]);
         },
       }}
     >

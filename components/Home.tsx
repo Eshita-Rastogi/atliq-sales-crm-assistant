@@ -75,7 +75,10 @@ export function Home({ radar, accounts: baseAccounts, refDate, nextSteps }: { ra
           {refDate} · {overdue.length > 0 ? `${overdue.length} follow-ups are overdue — start with the list below.` : "You're on top of your follow-ups."}
         </p>
       </div>
-      <Link href="/leads/new" className="btn-primary px-3 py-1.5 text-sm">+ New lead</Link>
+      <div className="flex gap-2">
+        <Link href="/meetings/new" className="btn px-3 py-1.5 text-sm">📝 Log meeting</Link>
+        <Link href="/leads/new" className="btn-primary px-3 py-1.5 text-sm">+ New lead</Link>
+      </div>
       </div>
 
       <section className="order-3 md:order-none">
