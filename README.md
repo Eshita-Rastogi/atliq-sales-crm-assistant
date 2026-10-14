@@ -1,5 +1,7 @@
 # AtliQ Sales & CRM Assistant — prototype
 
+> **📦 Capstone submission:** all 7 deliverables (research worksheet, Miro board, PRD, cost sheet, prototype, deck, demo video) are indexed in **[deliverables/](deliverables/README.md)**.
+
 An AI "sales memory" for AtliQ's founder-led sales team. It reads the CRM export, client email threads and meeting notes, finds what slipped through (client asks, our promises, deadlines, revisit dates, cross-sell hints and leads missing from the CRM), and turns them into a ranked daily action list, CRM updates for one-click approval and draft follow-ups.
 
 **AI suggests, people decide:** the app has no send capability and never writes to the CRM without a human approving the change.
