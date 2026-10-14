@@ -6,6 +6,8 @@ An AI "sales memory" for AtliQ's founder-led sales team. It reads the CRM export
 
 Capstone 1 · Codebasics AI PM · Eshita Rastogi. Built from the AI PRD (`AI PRD_AtliQ Sales & CRM Assistant.docx`).
 
+**Live demo:** https://atliq-sales-crm-assistant-eshita-rastogi.vercel.app — pick who you are on the start screen (try *Karandeep*). No login needed. **Eval:** 12 / 12 checks pass against the dataset's answer key (`npm run eval`).
+
 ## What you can do
 
 Start by picking who you are (Bhavin, Dhaval, Karandeep, Jay or *Whole team*); everything is then filtered to your deals. Switch anytime from the top bar.
@@ -51,7 +53,7 @@ Live: "Ask AI" and "Draft reply" call the reasoning model at request time.
 
 - **Date maths, ranking and duplicate matching run in code, not in the model**, so they are exact and explainable.
 - "Today" is fixed at **10 Jul 2026**, the dataset's reference date.
-- Models (Groq, OpenAI-compatible API): `openai/gpt-oss-20b` for extraction, `openai/gpt-oss-120b` for reasoning, Q&A and drafts. The LLM layer (`lib/llm.ts`) is provider-agnostic; the PRD's production plan is Claude Haiku 5.5 (extraction) + Claude Opus 5.5 (generation).
+- Models (Groq, OpenAI-compatible API): `openai/gpt-oss-20b` for extraction, `openai/gpt-oss-120b` for reasoning, Q&A and drafts. Speech-to-text: `whisper-large-v3-turbo` (Groq). Running cost ≈ $2.31 / month at AtliQ's volume (see the cost sheet). The LLM layer (`lib/llm.ts`) is provider-agnostic; moving extraction / writing to Claude (≈ $28 / month) is an open question in the PRD.
 
 ## Run it locally
 
@@ -65,7 +67,7 @@ npm run eval                    # grades the AI against the dataset's answer key
 npm run dev                     # http://localhost:3000
 ```
 
-`data/generated/model.json` is committed, so the UI works even without re-running the pipeline. Without a key, `npm run build:model` builds a CRM-only model and the live Ask / Draft features show a "not configured" message.
+`data/generated/model.json` is committed, so the UI works even without re-running the pipeline. Without a key, `npm run build:model` builds a CRM-only model and the live AI features (Ask, Draft reply, New-lead capture, Meeting minutes, Recording) show a "not configured" message.
 
 ## Deploy (Vercel via GitHub)
 
@@ -75,10 +77,12 @@ npm run dev                     # http://localhost:3000
 
 ## Guardrails built in
 
-- No send capability; drafts are copied by the seller. Missing facts appear as `[TBD]`.
+- No send capability; drafts are copied by the seller. Every open client question gets a `[TBD: …]` placeholder instead of a guessed answer (the draft is regenerated if none is present), and any number not found in the thread is flagged.
 - Every AI signal carries a verbatim quote; quotes not found in the source are dropped.
 - CRM changes are suggestions with source quotes; nothing is written without approval; decisions are logged.
-- Duplicates are flagged, never merged (e.g. GlobalMart L-1004 / L-1040 are different service lines).
+- Duplicates are flagged, never merged automatically — a person reviews side by side and chooses Merge or Keep both (e.g. GlobalMart L-1004 / L-1040 are different service lines).
+- Prompt-injection guard: the live AI features (Ask, Draft, New-lead capture, Meeting minutes) treat pasted text, notes and questions as data — embedded instructions like "ignore previous rules" are ignored. And the AI has no tools that send or write, so it cannot act on them anyway.
+- Inputs are size-limited (pasted text, questions, audio ≤ 4 MB) and the API key stays server-side.
 - Ambiguous dates ("after the 15th") are flagged "Check date" instead of guessed.
 - Ask AI flags any citation that doesn't exist in the data.
 
@@ -89,7 +93,8 @@ The dataset is used as provided (`data/`). Nothing was added. The editorial note
 ## Project structure
 
 ```
-app/                 pages (pipeline, today, accounts, leads, updates, ask, docs) and API routes (ask, draft)
+app/                 pages (home, follow-ups, leads, meetings, ask, updates, sources, settings, about-ai, docs)
+app/api/             live AI routes: ask, draft, capture (new lead), mom (meeting minutes), transcribe (Whisper)
 components/          UI components
 lib/                 dataset loader, dates, LLM client, prompts, types
 scripts/             build-model.ts (AI pipeline), eval.ts (answer-key eval)
