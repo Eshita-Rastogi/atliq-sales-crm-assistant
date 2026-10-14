@@ -149,6 +149,9 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
     try {
       const s = JSON.parse(localStorage.getItem(KEY) || "{}");
       if (s.owner) setOwner(s.owner);
+      // ?as=Bhavin (or All) opens the app as that person — handy for demos and screenshots
+      const as = new URLSearchParams(window.location.search).get("as");
+      if (as && ["Bhavin", "Dhaval", "Karandeep", "Jay", "All"].includes(as)) setOwner(as);
       setDone(s.done || {});
       setSnoozed(s.snoozed || {});
       setDecisions(s.decisions || {});
