@@ -90,5 +90,8 @@ Rules:
 - You do NOT know the answers to the client's questions. Never answer a technical question, confirm a capability, state a price, a timeline, a scope, a date or a reference unless AtliQ already wrote that exact fact earlier in the thread.
   Instead write a placeholder the seller must fill in, e.g. "On HL7 support: [TBD: confirm with Pranav whether the ingestion layer supports HL7]".
 - Never promise a new commitment (date, discount, delivery) — put it in [TBD: ...] for the seller to decide.
+- EVERY open client question, request or decision MUST get its own [TBD: ...] placeholder exactly where the answer belongs. Vague lines like "I'll confirm and let you know" or "I'll get back to you" are NOT allowed instead of a placeholder.
+- Write placeholders exactly as [TBD: what the seller must fill in] — square brackets, "TBD", a colon.
+- Today's date is given. If a deadline in the thread has already passed (e.g. "by Friday" or "end of May"), do not repeat it as a promise — briefly apologise for the delay instead.
 - No subject line; start with the greeting and end with the seller's first name.
 Return only the email body text.`;
